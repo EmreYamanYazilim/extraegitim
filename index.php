@@ -11,6 +11,11 @@ if(isset($_REQUEST["SK"])){
     $SayfaKoduDegeri    =   0;
 }
 
+if (isset($_REQUEST["SYF"])){
+    $Sayfalama = SayiliIcerikleriFilitrele($_REQUEST["SYF"]);
+}else{
+    $Sayfalama = 1;
+}
 
 ?>
 
@@ -85,9 +90,9 @@ if(isset($_REQUEST["SK"])){
                             <tr>
                                 <td width="300">&nbsp;</td>
                                 <td width="100" class="AnaMenu"><a href="index.php?SK=0"><b>Anasayfa</b></a></td>
-                                <td width="100" class="AnaMenu"><a href="xxxxx"><b>Bal Çeşitleri</b></a></td>
-                                <td width="100" class="AnaMenu"><a href="xxxxx"><b>Şifalı otlar</b></a></td>
-                                <td width="100" class="AnaMenu"><a href="xxxxx"><b>Salça</b></a></td>
+                                <td width="100" class="AnaMenu"><a href="index.php?SK=84"><b>Erkek ayakkabıları</b></a></td>
+                                <td width="100" class="AnaMenu"><a href="index.php?SK=86"><b>Kadın Ayakkabıları</b></a></td>
+                                <td width="100" class="AnaMenu"><a href="index.php?SK=88"><b>Çocuk Ayakkabıları</b></a></td>
                             </tr>
                         </table>
                 </tr>

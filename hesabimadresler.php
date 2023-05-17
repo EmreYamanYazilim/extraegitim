@@ -25,8 +25,8 @@ if (isset($_SESSION["Kullanici"])){ ?>
     </tr>
     <table width="1065" align="center" border="0" cellpadding="0" cellspacing="0">
         <tr>
-            <td width="500" valign="top">
-                    <table width="500" align="center" border="0" cellpadding="0" cellspacing="0">
+            <td width="1065" valign="top">
+                    <table width="1065" align="center" border="0" cellpadding="0" cellspacing="0">
                         <tr height="40">
                             <td style="color:#FF9900"><h3>Hesabım > Adresler</h3></td>
                         </tr>

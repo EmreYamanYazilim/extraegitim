@@ -84,7 +84,7 @@ if(isset($_SESSION["Kullanici"])){
                                 <tr height="30">
                                     <td width="125" align="left">&nbsp;#<?php echo DonusumleriGeriDondur($SiparisSatirlar["SiparisNumarasi"]); ?></td>
                                     <td width="75" align="left"><img src="Resimler/UrunResimleri/<?php echo $ResimKlasoruAdi; ?>/<?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunResmiBir"]); ?>" border="0" width="60" height="80"></td>
-                                    <td width="50" align="left"><a href="index.php?SK=75&UrunID=<?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunId"]); ?>"><img src="Resimler/DokumanKirmiziKalemli20x20.png" border="0"></a></td>
+                                    <td width="50" align="left"><a href="index.php?SK=75&UrunId=<?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunId"]); ?>"><img src="Resimler/DokumanKirmiziKalemli20x20.png" border="0"></a></td>
                                     <td width="415" align="center"><?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunAdi"]); ?></td>
                                     <td width="100" align="left"><?php echo FiyatBicimlendir(DonusumleriGeriDondur($SiparisSatirlar["UrunFiyati"])); ?> TL</td>
                                     <td width="50" align="left"><?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunAdedi"]); ?></td>

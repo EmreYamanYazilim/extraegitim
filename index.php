@@ -91,8 +91,8 @@ if (isset($_REQUEST["SYF"])){
                                 <td width="300">&nbsp;</td>
                                 <td width="100" class="AnaMenu"><a href="index.php?SK=0"><b>Anasayfa</b></a></td>
                                 <td width="100" class="AnaMenu"><a href="index.php?SK=84"><b>Erkek ayakkabıları</b></a></td>
-                                <td width="100" class="AnaMenu"><a href="index.php?SK=86"><b>Kadın Ayakkabıları</b></a></td>
-                                <td width="100" class="AnaMenu"><a href="index.php?SK=88"><b>Çocuk Ayakkabıları</b></a></td>
+                                <td width="100" class="AnaMenu"><a href="index.php?SK=85"><b>Kadın Ayakkabıları</b></a></td>
+                                <td width="100" class="AnaMenu"><a href="index.php?SK=86"><b>Çocuk Ayakkabıları</b></a></td>
                             </tr>
                         </table>
                 </tr>

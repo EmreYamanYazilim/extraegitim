@@ -22,14 +22,14 @@ if (isset($_REQUEST["AramaIcerigi"])) {
 
 $SayfalamaIcinSolVeSagButonSayisi = 2;
 $SayfaBasinaGosterilecekKayitSayisi = 10;
-$ToplamKayitSayisiSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE UrunTuru = 'Erkek Ayakkabısı' AND Durumu = '1' $MenuKosulu $AramaKosulu ORDER BY id DESC");
+$ToplamKayitSayisiSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE UrunTuru = 'Cocuk Ayakkabısı' AND Durumu = '1' $MenuKosulu $AramaKosulu ORDER BY id DESC");
 $ToplamKayitSayisiSorgusu->execute();
 $ToplamKayitSayisiSorgusu = $ToplamKayitSayisiSorgusu->rowCount();
 $SayfalamayaBaslanacakKayitSayisi = ($Sayfalama * $SayfaBasinaGosterilecekKayitSayisi) - $SayfaBasinaGosterilecekKayitSayisi;
 $BulunanSayfaSayisi = ceil($ToplamKayitSayisiSorgusu / $SayfaBasinaGosterilecekKayitSayisi);
 
 
-$AnaMenununTumUrunSayiSorgusu = $VeritabaniBaglantisi->prepare("SELECT SUM(UrunSayisi) AS  MenununToplamUrunu FROM menuler WHERE  UrunTuru = 'Erkek Ayakkabısı' "); // topam ürün gösterme
+$AnaMenununTumUrunSayiSorgusu = $VeritabaniBaglantisi->prepare("SELECT SUM(UrunSayisi) AS  MenununToplamUrunu FROM menuler WHERE  UrunTuru = 'Cocuk Ayakkabısı' "); // topam ürün gösterme
 $AnaMenununTumUrunSayiSorgusu->execute();
 $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_ASSOC);
 
@@ -50,13 +50,13 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                 <td bgcolor="#F1F1F1"><b>&nbsp;MENULER</b></td>
                             </tr>
                             <tr>
-                                <td><a href="index.php?SK=84"
+                                <td><a href="index.php?SK=86"
                                        style="text-decoration: none; <?php if ($GelenMenuId == "") { ?> color: #FF9900; font-weight: bold; <?php } else { ?>  color: #646464; font-weight: bold; <?php } ?>">
                                         Tüm Ürünler(<?php echo $AnaMenununTumUrunSayiSorgusu["MenununToplamUrunu"] ?>)
                                     </a></td>
                             </tr>
                             <?php
-                            $MenulerSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM menuler WHERE  UrunTuru = 'Erkek Ayakkabısı' ORDER BY MenuAdi ASC");
+                            $MenulerSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM menuler WHERE  UrunTuru = 'Cocuk Ayakkabısı' ORDER BY MenuAdi ASC");
                             $MenulerSorgusu->execute();
                             $MenuKayitSayisi = $MenulerSorgusu->rowCount();
                             $MenuKayitlari = $MenulerSorgusu->fetchAll(PDO::FETCH_ASSOC);
@@ -67,7 +67,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
 
 
                                 <tr>
-                                    <td><a href="index.php?SK=84&MenuID=<?php echo $Menu["id"] ?>"
+                                    <td><a href="index.php?SK=86&MenuID=<?php echo $Menu["id"] ?>"
                                            style="text-decoration: none;  <?php if ($GelenMenuId == $Menu["id"]) { ?> color: #FF9900; font-weight: bold; <?php } else { ?> color: #646464; font-weight: bold; <?php } ?>  "> <?php echo DonusumleriGeriDondur($Menu["MenuAdi"]) ?>
                                             (<?php echo $Menu["UrunSayisi"] ?>)
                                         </a></td>
@@ -126,7 +126,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                 <tr>
                     <td>
                         <div>
-                            <form class="AramaAlani" action="index.php?SK=84" method="POST">
+                            <form class="AramaAlani" action="index.php?SK=86" method="POST">
 
                                 <?php if ($GelenMenuId != "") { ?>
                                     <input type="hidden" name="MenuID" value="<?php echo $GelenMenuId ?>">
@@ -148,7 +148,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
 
                         <table width="795" align="center" border="0" cellpadding="0" cellspacing="0">
                             <tr><?php
-                                $UrunlerSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE UrunTuru = 'Erkek Ayakkabısı' AND Durumu = '1' $MenuKosulu   $AramaKosulu  ORDER BY id DESC LIMIT  $SayfalamayaBaslanacakKayitSayisi, $SayfaBasinaGosterilecekKayitSayisi");
+                                $UrunlerSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE UrunTuru = 'Cocuk Ayakkabısı' AND Durumu = '1' $MenuKosulu   $AramaKosulu  ORDER BY id DESC LIMIT  $SayfalamayaBaslanacakKayitSayisi, $SayfaBasinaGosterilecekKayitSayisi");
                                 $UrunlerSorgusu->execute();
                                 $UrunSayisi = $UrunlerSorgusu->rowCount();
                                 $UrunKayitlari = $UrunlerSorgusu->fetchAll(PDO::FETCH_ASSOC);
@@ -188,7 +188,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                             <tr height="40">
                                                 <td align="center"><a
                                                             href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>">
-                                                        <img src="Resimler/UrunResimleri/Erkek/<?php echo DonusumleriGeriDondur($Kayit["UrunResmiBir"]); ?>"
+                                                        <img src="Resimler/UrunResimleri/Cocuk/<?php echo DonusumleriGeriDondur($Kayit["UrunResmiBir"]); ?>"
                                                              width="185" height="247" border="0"></a></td>
                                             </tr>
                                             <tr height="25" align="center">
@@ -267,9 +267,9 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                 <div class="SayfalamaAlaniIciNumaraAlaniKapsayicisi">
                                     <?php
                                     if ($Sayfalama > 1) {
-                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=84" . $SayfalamaKosulu . "&SYF=1'><<</a></span>";
+                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=86" . $SayfalamaKosulu . "&SYF=1'><<</a></span>";
                                         $SayfalamaIcinSayfaDegeriniBirGeriAl = $Sayfalama - 1;
-                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=84" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirGeriAl . "'><</a></span>";
+                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=86" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirGeriAl . "'><</a></span>";
                                     }
 
                                     for ($SayfalamaIcinSayfaIndexDegeri = $Sayfalama - $SayfalamaIcinSolVeSagButonSayisi; $SayfalamaIcinSayfaIndexDegeri <= $Sayfalama + $SayfalamaIcinSolVeSagButonSayisi; $SayfalamaIcinSayfaIndexDegeri++) {
@@ -277,15 +277,15 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                             if ($Sayfalama == $SayfalamaIcinSayfaIndexDegeri) {
                                                 echo "<span class='SayfalamaAktif'>" . $SayfalamaIcinSayfaIndexDegeri . "</span>";
                                             } else {
-                                                echo "<span class='SayfalamaPasif'><a href='index.php?SK=84" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaIndexDegeri . "'> " . $SayfalamaIcinSayfaIndexDegeri . "</a></span>";
+                                                echo "<span class='SayfalamaPasif'><a href='index.php?SK=86" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaIndexDegeri . "'> " . $SayfalamaIcinSayfaIndexDegeri . "</a></span>";
                                             }
                                         }
                                     }
 
                                     if ($Sayfalama != $BulunanSayfaSayisi) {
                                         $SayfalamaIcinSayfaDegeriniBirIleriAl = $Sayfalama + 1;
-                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=84" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirIleriAl . "'>></a></span>";
-                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=84" . $SayfalamaKosulu . "&SYF=" . $BulunanSayfaSayisi . "'>>></a></span>";
+                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=86" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirIleriAl . "'>></a></span>";
+                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=86" . $SayfalamaKosulu . "&SYF=" . $BulunanSayfaSayisi . "'>>></a></span>";
                                     }
                                     ?>
                                 </div>

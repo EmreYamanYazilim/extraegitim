@@ -157,6 +157,17 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                 $SutunAdetSayisi = 4;
 
                                 foreach ($UrunKayitlari as $Kayit) {
+                                    $UrunFiyati                     =       DonusumleriGeriDondur($Kayit["UrunFiyati"]);
+                                    $UrunParaBirimi                 =       DonusumleriGeriDondur($Kayit["ParaBirimi"]);
+
+                                    if ($UrunParaBirimi=="USD"){
+                                        $UrunFiyatHesapla   =  $UrunFiyati*$DolarKuru;
+                                    }elseif ($UrunParaBirimi=="EUR"){
+                                        $UrunFiyatHesapla   =   $UrunFiyati*$EuroKuru;
+                                    }else{
+                                        $UrunFiyatHesapla   =   $UrunFiyati;
+                                    }
+
                                     $urununToplamYorumSayisi        =       DonusumleriGeriDondur($Kayit["YorumSayisi"]);
                                     $UnrununToplamYorumPuani        =       DonusumleriGeriDondur($Kayit["ToplamYorumPuani"]);
 
@@ -215,8 +226,8 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                             </tr>
                                             <tr height="25" align="center">
                                                 <td width="191"><a
-                                                            href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>" style="color: red; text-decoration: none; font-weight: bold;"><?php echo DonusumleriGeriDondur($Kayit["UrunFiyati"]); ?>
-                                                    </a></td>
+                                                            href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>" style="color: red; text-decoration: none; font-weight: bold;"><?php echo DonusumleriGeriDondur($UrunFiyatHesapla); echo " TL" ?>
+                                                    </a> </td>
                                             </tr>
                                             <tr height="25" align="center">
                                                 <td width="191">&nbsp;</td>

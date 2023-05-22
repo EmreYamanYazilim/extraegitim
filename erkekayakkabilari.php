@@ -157,6 +157,19 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                 $SutunAdetSayisi = 4;
 
                                 foreach ($UrunKayitlari as $Kayit) {
+                                    // yabancı kur üzerinden fiyat gösterme
+                                    $UrunFiyati                     =       DonusumleriGeriDondur($Kayit["UrunFiyati"]);
+                                    $UrunParaBirimi                 =       DonusumleriGeriDondur($Kayit["ParaBirimi"]);
+
+                                    if ($UrunParaBirimi=="USD"){
+                                        $UrunFiyatiHesapla  = $UrunFiyati*$DolarKuru; // dolar kuru ayar.phpden çektik
+                                    }elseif($UrunParaBirimi=="EUR"){
+                                        $UrunFiyatiHesapla  = $UrunFiyati*$EuroKuru;
+                                    }else{
+                                        $UrunFiyatiHesapla  =   $UrunFiyati;
+                                    }
+
+                                    // puanlama bölümü
                                     $urununToplamYorumSayisi        =       DonusumleriGeriDondur($Kayit["YorumSayisi"]);
                                     $UnrununToplamYorumPuani        =       DonusumleriGeriDondur($Kayit["ToplamYorumPuani"]);
 
@@ -215,7 +228,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                             </tr>
                                             <tr height="25" align="center">
                                                 <td width="191"><a
-                                                            href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>" style="color: red; text-decoration: none; font-weight: bold;"><?php echo DonusumleriGeriDondur($Kayit["UrunFiyati"]); ?>
+                                                            href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>" style="color: red; text-decoration: none; font-weight: bold;"><?php echo DonusumleriGeriDondur($UrunFiyatiHesapla); echo " TL" ?>
                                                     </a></td>
                                             </tr>
                                             <tr height="25" align="center">

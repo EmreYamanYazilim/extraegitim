@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET["MenuID"])) {
+if (isset($_REQUEST["MenuID"])) {
     $GelenMenuId = SayiliIcerikleriFilitrele(Guvenlik($_REQUEST["MenuID"]));
     $MenuKosulu = " AND MenuId = '$GelenMenuId'";
     $SayfalamaKosulu = "&MenuID=" . $GelenMenuId;
@@ -64,15 +64,12 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
 
                             foreach ($MenuKayitlari as $Menu) {
                                 ?>
-
-
                                 <tr>
                                     <td><a href="index.php?SK=85&MenuID=<?php echo $Menu["id"] ?>"
                                            style="text-decoration: none;  <?php if ($GelenMenuId == $Menu["id"]) { ?> color: #FF9900; font-weight: bold; <?php } else { ?> color: #646464; font-weight: bold; <?php } ?>  "> <?php echo DonusumleriGeriDondur($Menu["MenuAdi"]) ?>
                                             (<?php echo $Menu["UrunSayisi"] ?>)
                                         </a></td>
                                 </tr>
-
 
                             <?php } ?>
 
@@ -91,16 +88,12 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                             <tr height="50">
                                 <td bgcolor="#F1F1F1"><b>&nbsp;Reklamlar</b></td>
                             </tr>
-
                             <?php
                             $BannerSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM bannerlar WHERE BannerAlani = 'Menu Altı' ORDER BY GosterimSayisi ASC LIMIT 1 ");
                             $BannerSorgusu->execute();
                             $BannerSayisi = $BannerSorgusu->rowCount();
                             $BannerKaydi = $BannerSorgusu->fetch(PDO::FETCH_ASSOC);
-
-
                             ?>
-
 
                             <tr height="250">
                                 <td><img src="Resimler/<?php echo $BannerKaydi["BannerResmi"]; ?>" alt=""></td>
@@ -108,7 +101,6 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                             <?php
                             $BannerGuncelle = $VeritabaniBaglantisi->prepare("UPDATE bannerlar SET GosterimSayisi=GosterimSayisi+1 WHERE id = ? LIMIT 1");
                             $BannerGuncelle->execute([$BannerKaydi["id"]]);
-
                             ?>
 
 
@@ -119,7 +111,6 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
             </table>
         </td>
         <td width="11" align="left">&nbsp;</td>
-
 
         <td width="795" align="left" valign="top"> Ürünler
             <table width="795" valign="top" align="left" border="0" cellspacing="0" cellpadding="0">

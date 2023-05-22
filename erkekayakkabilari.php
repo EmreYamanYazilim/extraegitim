@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET["MenuID"])) {
+if (isset($_REQUEST["MenuID"])) {
     $GelenMenuId = SayiliIcerikleriFilitrele(Guvenlik($_REQUEST["MenuID"]));
     $MenuKosulu = " AND MenuId = '$GelenMenuId'";
     $SayfalamaKosulu = "&MenuID=" . $GelenMenuId;
@@ -204,6 +204,8 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                                         <img src="Resimler/UrunResimleri/Erkek/<?php echo DonusumleriGeriDondur($Kayit["UrunResmiBir"]); ?>"
                                                              width="185" height="247" border="0"></a></td>
                                             </tr>
+
+
                                             <tr height="25" align="center">
                                                 <td width="191"><a
                                                             href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>" style="color: #FF9900; font-weight: bold; text-decoration: none;">Erkek

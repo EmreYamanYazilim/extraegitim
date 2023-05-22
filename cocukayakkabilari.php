@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET["MenuID"])) {
+if (isset($_REQUEST["MenuID"])) {
     $GelenMenuId = SayiliIcerikleriFilitrele(Guvenlik($_REQUEST["MenuID"]));
     $MenuKosulu = " AND MenuId = '$GelenMenuId'";
     $SayfalamaKosulu = "&MenuID=" . $GelenMenuId;

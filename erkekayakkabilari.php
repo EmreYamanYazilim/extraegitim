@@ -132,10 +132,10 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                     <input type="hidden" name="MenuID" value="<?php echo $GelenMenuId ?>">
                                 <?php } ?>
                                 <div class="AramaAlaniButonKapsamaAlani">
-                                    <input type="submit" value="" class="AramaAlaniButonu">
+                                    <input type="submit" value="" class="AramaAlaniButonu" placeholder="Lütfen Aramak İstediklerinizi Yazın">
                                 </div>
                                 <div class="AramaAlaniInputKapsamaAlani">
-                                    <input type="text" name="AramaIcerigi" class="AramaAlaniInputu">
+                                    <input type="text" name="AramaIcerigi" class="AramaAlaniInputu" placeholder="Lütfen Aramak İstediklerinizi Yazın">
                                 </div>
 
                 <tr>
@@ -195,9 +195,10 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
 
 
                                     ?>
-                                    <td width="191" valign="top">
-                                        <table align="left" border="0" cellpadding="0" cellspacing="0"
-                                               style="border: 1px solid #CCCCCC; margin-bottom: 10px;">
+
+                                    <td width="191" valign="top" border="0" cellpadding="0" cellspacing="0">
+                                        <table align="left"  cellpadding="0" cellspacing="0"
+                                               style="border: 1px solid darkorange; margin-bottom: 10px;">
                                             <tr height="40">
                                                 <td align="center"><a
                                                             href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>">
@@ -222,7 +223,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                                         <?php echo $Kayit["UrunAdi"] ?></div></a></td>
                                             </tr>
 
-                                            <tr height="25" align="center">
+                                            <tr height="25" align="center" style="border: darkorange 1px solid;">
                                                 <td width="191"><a
                                                             href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>"><img
                                                                 src="Resimler/<?php echo $PuanResmi; ?>" alt="">
@@ -282,7 +283,8 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                 <div class="SayfalamaAlaniIciNumaraAlaniKapsayicisi">
                                     <?php
                                     if ($Sayfalama > 1) {
-                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=84" . $SayfalamaKosulu . "&SYF=1'><<</a></span>";
+                                        echo "<span class='SayfalamaPasif'><a href='index.php?SK=8
+4" . $SayfalamaKosulu . "&SYF=1'><<</a></span>";
                                         $SayfalamaIcinSayfaDegeriniBirGeriAl = $Sayfalama - 1;
                                         echo "<span class='SayfalamaPasif'><a href='index.php?SK=84" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirGeriAl . "'><</a></span>";
                                     }

@@ -376,9 +376,9 @@ html, body{
     height: 30px;
     margin: 0;
     padding: 10px 0px 5px 0px;
-    background: #FF9900;
+    background: darkorange;
     color: white;
-    border: 1px solid #FF9900;
+    border: 1px solid darkorange;
     border-radius: 3px;
     outline: none;
     text-align: center;

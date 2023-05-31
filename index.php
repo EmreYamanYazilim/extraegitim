@@ -41,7 +41,7 @@ if (isset($_REQUEST["SYF"])){
 <body>
 <table width="1065" height="100%" align="center" border="0" cellpadding="0" cellspacing="0">
 
-    <tr bgcolor="black" height="40" height="1065">
+    <tr bgcolor="black" height="30" height="1065">
         <td>
             <img src="Resimler/HeaderMesajResmi.png" border="0" alt="">
         </td>
@@ -79,7 +79,14 @@ if (isset($_REQUEST["SYF"])){
 
                     <td width="20"><a href="xxxxx"> <img src="Resimler/SepetBeyaz16x16.png" alt=""
                                                          style="margin-top: 5px;"></a></td>
-                    <td width="103" class="MaviAlanMenusu"><a href="xxxxx"> Alışveriş Sepeti</a></td>
+
+                    <?php if ($_SESSION["Kullanici"]) { ?>
+                        <td width="103" class="MaviAlanMenusu"><a href="index.php?SK=94"> Alışveriş Sepeti</a></td>
+                    <?php }
+                    else{ ?>
+                        <td width="103" class="MaviAlanMenusu">Alışveriş Sepeti</td>
+                        <?php } ?>
+
                 </tr>
             </table>
             <table width="1065" height="80" align="center" bgcolor="white" border="0" cellpadding="0" cellspacing="0">

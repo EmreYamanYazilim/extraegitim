@@ -7,4 +7,11 @@ $(document).ready(function () {
         $(IslenecekAlan).parent().find(".SorununCevapAlani").slideToggle();
 
     }
+
+    $.UrunDetayResmiDegistir = function (Klasor, ResimDegeri){
+        var ResimIcıDosyaYolu = "Resimler/UrunResimleri/" + Klasor + "/" + ResimDegeri;
+        $("#BuyukResim").attr("src", ResimIcıDosyaYolu);
+    }
+
+
 });

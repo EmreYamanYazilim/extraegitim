@@ -4,7 +4,7 @@ try {
     $VeritabaniBaglantisi = new PDO("mysql:host=localhost;dbname=extraegitim;charset=utf8", "root", "");
 
 } catch (PDOExpception $Hata) {
-    //echo "bağlantı hatası <br /> " . $Hata->getMessage(); // bu alanı kapatın çünkü site hata yaparsa kullanıcılar hata değerini görmesin
+    //echo "bağlantı hatası <br /> " . $Hata->getMessage(); // bu alanı kapatıyorum çünkü site hata yaparsa kullanıcılar hata değerini görmesin
     die();
 }
 
@@ -30,6 +30,11 @@ if ($AyarlarSayisi > 0) {
     $SosyalLinkYoutube      = $Ayarlar["SosyalLinkYoutube"];
     $SosyalLinkLinkedin     = $Ayarlar["SosyalLinkLinkedin"];
     $SosyalLinkPinterest    = $Ayarlar["SosyalLinkPinterest"];
+    $DolarKuru              = $Ayarlar["DolarKuru"];
+    $EuroKuru               = $Ayarlar["EuroKuru"];
+
+
+
 
 
 } else {

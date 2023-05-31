@@ -135,7 +135,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                     <input type="submit" value="" class="AramaAlaniButonu">
                                 </div>
                                 <div class="AramaAlaniInputKapsamaAlani">
-                                    <input type="text" name="AramaIcerigi" class="AramaAlaniInputu">
+                                    <input type="text" name="AramaIcerigi" class="AramaAlaniInputu" placeholder="Lütfen Aramak İstediklerinizi Yazın">
                                 </div>
 
                 <tr>
@@ -195,7 +195,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                     ?>
                                     <td width="191" valign="top">
                                         <table align="left" border="0" cellpadding="0" cellspacing="0"
-                                               style="border: 1px solid #CCCCCC; margin-bottom: 10px;">
+                                               style="border: 1px solid darkorange; margin-bottom: 10px;">
                                             <tr height="40">
                                                 <td align="center"><a
                                                             href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>">
@@ -204,7 +204,7 @@ $AnaMenununTumUrunSayiSorgusu = $AnaMenununTumUrunSayiSorgusu->fetch(PDO::FETCH_
                                             </tr>
                                             <tr height="25" align="center">
                                                 <td width="191"><a
-                                                            href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>" style="color: #FF9900; font-weight: bold; text-decoration: none;">Erkek
+                                                            href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($Kayit["id"]); ?>" style="color: #FF9900; font-weight: bold; text-decoration: none;">Çocuk
                                                         Ayakkabısı
                                                     </a></td>
                                             </tr>

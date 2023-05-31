@@ -2,6 +2,7 @@
 
 
 
+
 $IPAdresi			=	$_SERVER['REMOTE_ADDR'];
 $ZamanDamgasi		=	time();
 $TarihSaat			=	date("d.m.Y H:i:s", $ZamanDamgasi);
@@ -12,6 +13,14 @@ function TarihBul($Deger){
     return $Sonuc;
 }
 
+function UcGunIleriTarihi(){
+    global $ZamanDamgasi;
+    $BirGun     =   86400;  // bir gün bu kadar  saniyedir
+    $Hesapla    =   $ZamanDamgasi+(3*$BirGun);
+    $Cevir      =   date("d.m.Y", $Hesapla );
+    $Sonuc      =   $Cevir;
+    return $Sonuc;
+}
 
 
 function RakamlarHariciTumKArakterleriSil($Deger){
@@ -66,6 +75,12 @@ function IbanBicimlendir($Deger){
     $Sonuc              =   $Duzenle;
     return $Sonuc;
 
+}
+
+function FiyatBicimlendir($Deger) {
+    $Bicimlendir = number_format($Deger , "2", ",", ".");
+    $Sonuc = $Bicimlendir;
+        return $Sonuc;
 }
 
 ?>

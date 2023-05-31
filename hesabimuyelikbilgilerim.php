@@ -46,7 +46,7 @@ if (isset($_SESSION["Kullanici"])){ ?>
                         <td valign="bottom" align="left">isim soy isim</td>
                         </tr>
                         <tr height="30">
-                            <td valign="top" align="left"><?php echo $IsimSoyisim; ?> </td>
+                            <td valign="top" align="left"><?php echo $IsimSoyisim;  ?> </td>
                         </tr>
 
                         <td valign="bottom" align="left">telefon numarası</td>

@@ -1,6 +1,44 @@
 <?php
 if (isset($_SESSION["Kullanici"])) {
+
+
+    $StokIcinSepettekiUrunlerSorgusu    =      $VeritabaniBaglantisi->prepare("SELECT * FROM sepet WHERE UyeId = ?");
+    $StokIcinSepettekiUrunlerSorgusu->execute([$KullaniciID]);
+    $StokIcinSepettekiUrunlerSayisi     =      $StokIcinSepettekiUrunlerSorgusu->rowCount();
+    $StokIcinSepettekiKayitlar          =      $StokIcinSepettekiUrunlerSorgusu->fetchAll(PDO::FETCH_ASSOC);
+    if ($StokIcinSepettekiUrunlerSayisi>0) { //sepetteki urunleri kontrol edip stokta olmaynaı düşürmek için yaptım sepetten id,Varyantid ve ürünadedini çektim
+        foreach ($StokIcinSepettekiKayitlar as $StokIcinSepettekiSatirlar) {
+
+
+
+        $StokIcinSepetIdsi              =   $StokIcinSepettekiSatirlar["id"];
+        $StokIcinSepettekiVaryantIdsi   =   $StokIcinSepettekiSatirlar["VaryantId"];
+        $StokIcinSepettekiUrunAdedi     =   $StokIcinSepettekiSatirlar["UrunAdedi"];
+
+
+        $StokIcinUrununVaryantBilgisiSorgusu    =   $VeritabaniBaglantisi->prepare("SELECT * FROM urunvaryantlari WHERE  id = ? LIMIT 1"); // stok içi varyantı aldık çünki stoklarım burda
+        $StokIcinUrununVaryantBilgisiSorgusu->execute([$StokIcinSepettekiVaryantIdsi]);
+        $StokIcinVaryantKaydi                   =   $StokIcinUrununVaryantBilgisiSorgusu->fetch(PDO::FETCH_ASSOC);
+        
+            $StokIcinUrunStokAdedi              =   $StokIcinVaryantKaydi["StokAdedi"];
+
+            if ($StokIcinUrunStokAdedi== 0) { // alışverişte stok biterse sepetimizde varsa sildirmek için
+                $StokIciYoksaSepettenSil    =   $VeritabaniBaglantisi->prepare("DELETE FROM sepet WHERE id = ? AND UyeId = ? LIMIT 1");
+                $StokIciYoksaSepettenSil->execute([$StokIcinSepetIdsi, $KullaniciID]);
+
+            }elseif ($StokIcinSepettekiUrunAdedi>$StokIcinUrunStokAdedi) {  // urunvaryantlari içindeki stoktadedi'de yoksa  ürünleri urun adedini stokiçinurunstok adedinde yani urun varyantlari içindeki stok adetlerine eşitledik
+                $StokIcinGuncellemeSorgusu = $VeritabaniBaglantisi->prepare("UPDATE sepet SET UrunAdedi = ? WHERE id = ? AND UyeId = ? LIMIT 1");
+                $StokIcinGuncellemeSorgusu->execute([$StokIcinUrunStokAdedi, $StokIcinSepetIdsi, $KullaniciID]);
+
+            }
+        }
+    }
+
+
     ?>
+
+
+
     <table width="1065" align="center" border="0" cellpadding="0" cellspacing="0">
 
         <tr>
@@ -33,7 +71,7 @@ if (isset($_SESSION["Kullanici"])) {
                             $SepettekiUrununAdedi           =   $SepetSatirlari["UrunAdedi"];
 
                             $UrunBilgileriSorgusu           =   $VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE id = ? LIMIT 1");
-                            $UrunBilgileriSorgusu->execute([$SepettekiUrununIdsi]); // Urunİdsinden
+                            $UrunBilgileriSorgusu->execute([$SepettekiUrununIdsi]); // Sepet Urunİdsinden  urunler içine eşleşerek o ürünü bulup onun verilerini altta vermek için
                             $UrunKaydi                      =   $UrunBilgileriSorgusu->fetch(PDO::FETCH_ASSOC);
 
 
@@ -45,7 +83,7 @@ if (isset($_SESSION["Kullanici"])) {
                             $UrununVaryantBasligi           =   $UrunKaydi["VaryantBasligi"];
 
                             $UrununVaryantBilgisiSorgusu    =   $VeritabaniBaglantisi->prepare("SELECT * FROM urunvaryantlari WHERE id = ? LIMIT 1");
-                            $UrununVaryantBilgisiSorgusu->execute([$SepettekiUrununVaryantIdsi]);
+                            $UrununVaryantBilgisiSorgusu->execute([$SepettekiUrununVaryantIdsi]); //sepet stunundaki varyantid ile urunvaryantlarindaki id eşitleyerek  urun varyantlarindaki bilgileri çektik
                             $VaryantKaydi                   =   $UrununVaryantBilgisiSorgusu->fetch(PDO::FETCH_ASSOC);
 
                             $UrununVaryantAdi               =   $VaryantKaydi["VaryantAdi"];
@@ -73,10 +111,10 @@ if (isset($_SESSION["Kullanici"])) {
                             }
 
                             $UrunToplamFiyatHesapla      =  $UrunFiyatHesapla*$SepettekiUrununAdedi;
-                            $UrunToplamFiyatBicimlendir =   FiyatBicimlendir($UrunToplamFiyatHesapla);
+                            $UrunToplamFiyatBicimlendir =   FiyatBicimlendir($UrunToplamFiyatHesapla);// adet attırdığında altta toplamı göstermek için
 
-                            $SepettekiToplamUrunSayisi      +=  $SepettekiUrununAdedi; // her geldiğinde sepetteki ürün neyse ona ekleyerek devam eder
-                            $SepettekiToplamFiyat           +=$UrunFiyatHesapla*$SepettekiUrununAdedi;
+                            $SepettekiToplamUrunSayisi      +=  $SepettekiUrununAdedi; // her geldiğinde sepetteki ürün neyse ona ekleyerek devam eder  toplam kaç adet ürün aldığıın hesaplama
+                            $SepettekiToplamFiyat           +=$UrunFiyatHesapla*$SepettekiUrununAdedi;// sağ üstte tüm ürünlerin toplamını hesaplamak için
 
 
                         ?>

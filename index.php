@@ -80,10 +80,10 @@ if (isset($_REQUEST["SYF"])){
                     <td width="20"><a href="xxxxx"> <img src="Resimler/SepetBeyaz16x16.png" alt=""
                                                          style="margin-top: 5px;"></a></td>
 
-                    <?php if ($_SESSION["Kullanici"]) { ?>
+                    <?php if (isset($_SESSION["Kullanici"])) { ?>
                         <td width="103" class="MaviAlanMenusu"><a href="index.php?SK=94"> Alışveriş Sepeti</a></td>
-                    <?php }
-                    else{ ?>
+                    <?php
+                    } else { ?>
                         <td width="103" class="MaviAlanMenusu">Alışveriş Sepeti</td>
                         <?php } ?>
 

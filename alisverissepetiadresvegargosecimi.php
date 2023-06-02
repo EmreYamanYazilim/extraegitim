@@ -67,7 +67,7 @@ if (isset($_SESSION["Kullanici"])) {
                         $SepettekiToplamUrunSayisi          = 0; // sepetteki ürün sayısını belirtmediğimiz zamanda hata veriyor o yüzden belirtmemiz gerek
                         $SepettekiToplamFiyat               = 0;
                         $SepettekiToplamKargoFiyati         = 0;
-
+                        $SepettekiToplamKargoFiyatiHesapla  = 0;
                         foreach ($SepettekiKayitlar as $SepetSatirlari) {
                             // sepet stunu içinde müşteri ismi resim fiyatı vb şeyleri tutmadığımız için  Urunİdsinden ürün bilgilerine erişicez varyant idsinden varyntlara vb
                             $SepetIdsi = $SepetSatirlari["id"];
@@ -103,10 +103,25 @@ if (isset($_SESSION["Kullanici"])) {
                             $SepettekiToplamUrunSayisi += $SepettekiUrununAdedi; // her geldiğinde sepetteki ürün neyse ona ekleyerek devam eder  toplam kaç adet ürün aldığıın hesaplama
                             $SepettekiToplamFiyat      += $UrunFiyatHesapla * $SepettekiUrununAdedi;// sağ üstte tüm ürünlerin toplamını hesaplamak için
 
-                            $SepettekiToplamKargoFiyatiHesapla          +=   $UrununKargoUcreti*$SepettekiUrununAdedi;
+                            $SepettekiToplamKargoFiyatiHesapla          =   $UrununKargoUcreti*$SepettekiToplamUrunSayisi;
                             $SepettekiToplamKargoFiyatiBicimlendir      =   FiyatBicimlendir($SepettekiToplamKargoFiyatiHesapla);
 
+
+
+                            if ($SepettekiToplamFiyat>=$UcretsizKargoBaraji) {//ayar.php den kargo barajını çektik
+                                $SepettekiToplamKargoFiyatiHesapla =0;
+                                $SepettekiToplamKargoFiyatiBicimlendir =   FiyatBicimlendir($SepettekiToplamKargoFiyatiHesapla);
+                                $OdenecekToplamTutariHesaplaBicimlendir=    FiyatBicimlendir($SepettekiToplamFiyat);
+                            } else {
+                                $OdenecekToplamTutariHesapla                =   ($SepettekiToplamFiyat+$SepettekiToplamKargoFiyatiHesapla);
+                                $OdenecekToplamTutariHesaplaBicimlendir     =   FiyatBicimlendir($OdenecekToplamTutariHesapla);
+
+                            }
+                            
+
                         }
+
+
 
                         $AdreslerSorgusu    = $VeritabaniBaglantisi->prepare("SELECT * FROM adresler WHERE UyeId=? ORDER BY id DESC ");
                         $AdreslerSorgusu->execute([$KullaniciID]);
@@ -225,14 +240,23 @@ if (isset($_SESSION["Kullanici"])) {
                     <tr height="40">
                         <td style="color:#FF9900" align="right"><h3>Sipariş Özeti</h3></td>
                     </tr>
+
                     <tr height="30">
                         <td valign="top" style="border-bottom: 1px dashed #CCCCCC;" align="right">Toplam <b style="color: darkorange"><?php echo $SepettekiToplamUrunSayisi; ?> </b> adet ürün</b></td>
                     </tr>
                     <tr height="5">
                         <td height="5" style="font-size: 5px;">&nbsp;</td>
                     </tr>
+                    <tr><td align="right">Ödenecek Toplam Tutar</td></tr>
+                    <tr><td align="right" style="font-size: 24px;  font-weight: bold;"><?php echo $OdenecekToplamTutariHesaplaBicimlendir ?> TL</td></tr>
+                    <tr height="5">
+                        <td height="5" style="font-size: 10px;">&nbsp;</td>
+                    </tr>
+                    <tr height="5">
+                        <td height="5" style="font-size: 5px;">&nbsp;</td>
+                    </tr>
                     <tr><td align="right">Ödenecek Ürün Tutarı</td></tr>
-                    <tr><td align="right" style="font-size: 24px;  font-weight: bold;"><?php echo FiyatBicimlendir($SepettekiToplamFiyat); ?> TL</td></tr>
+                    <tr><td align="right" style="font-size: 24px;  font-weight: bold;"><?php echo FiyatBicimlendir($SepettekiToplamFiyat) ?> TL</td></tr>
                     <tr height="5">
                         <td height="5" style="font-size: 10px;">&nbsp;</td>
                     </tr>
@@ -247,7 +271,7 @@ if (isset($_SESSION["Kullanici"])) {
 
 
                     <tr>
-                        <td align="right"><div class="SepetIciDevamEtVeAlisverisiTamamlaButonu"><a href="index.php?SK=98"><img src="Resimler/SepetBeyaz21x20.png" border="0"> <div>DEVAM ET</div></a></div></td>
+                        <td align="left"><input type="submit" class="AlisverisiTamamlaButonu" value="Alışverişi Tamamla"></td>
                     </tr>
                 </table>
             </td>

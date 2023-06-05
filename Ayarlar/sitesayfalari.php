@@ -102,3 +102,4 @@ $Sayfa[96] = "alisverissepetiurunadetazalt.php";
 $Sayfa[97] = "alisverissepetiurunadetarrtir.php";
 $Sayfa[98] = "alisverissepetiadresvegargosecimi.php";
 $Sayfa[99] = "alisverissepetiodemesecimi.php";
+$Sayfa[100] = "alisverissepetiodemesecimisonuc.php";

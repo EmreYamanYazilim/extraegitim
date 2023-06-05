@@ -142,7 +142,7 @@ if (isset($_SESSION["Kullanici"])) {
                                 <table width="800" align="center" border="0" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td align="left" width="50" style="border-bottom: 1px dashed #CCCCCC;">
-                                            <input type="radio" name="AdresSecimi" value="<?php echo DonusumleriGeriDondur($AdresSatirlari["id"]); ?>"></td>
+                                            <input type="radio" name="AdresSecimi" checked="checked" value="<?php echo DonusumleriGeriDondur($AdresSatirlari["id"]); ?>"></td>
                                         <td align="left" width="750" style="border-bottom: 1px dashed #CCCCCC;"><?php echo  DonusumleriGeriDondur($AdresSatirlari["AdSoyad"]);  ?>
                                             <br> <?php echo  DonusumleriGeriDondur($AdresSatirlari["Adres"]);  ?><br>  <?php echo  DonusumleriGeriDondur($AdresSatirlari["Ilce"]);  ?>/<?php  echo DonusumleriGeriDondur($AdresSatirlari["Sehir"]); ?>
                                             <br> <?php  echo DonusumleriGeriDondur($AdresSatirlari["TelefonNumarasi"]);  ?> </td>
@@ -180,6 +180,7 @@ if (isset($_SESSION["Kullanici"])) {
 
                                         $DonguSayisi		=	1;
                                         $SutunAdetSayisi	=	3;
+                                        $SecimicinSayi      =   1;
 
                                         foreach($KargoKayitlari as $KargoKaydi){
                                             ?>
@@ -192,7 +193,8 @@ if (isset($_SESSION["Kullanici"])) {
                                                         <td colspan="4" align="center" ><img src="Resimler/<?php echo DonusumleriGeriDondur($KargoKaydi["KargoFirmasiLogosu"]); ?>" style="width: 150px; height: 30px;" border="0"></td>
                                                     </tr>
                                                     <tr height="25">
-                                                        <td width="25" align="center"><input type="radio" style="height: 30px; " value="<?php echo $KargoKaydi["id"]; ?>" name="KargoSecimi"></td>
+                                                        <td width="25" align="center"><input type="radio"  style="height: 30px; " value="<?php echo $KargoKaydi["id"]; ?>" name="KargoSecimi" <?php if ($SecimicinSayi==1) {
+                                                             ?> checked="checked"  <?php } ?>      ></td>
 
                                                     </tr>
                                                     <tr height="">
@@ -201,6 +203,8 @@ if (isset($_SESSION["Kullanici"])) {
                                                 </table>
                                             </td>
                                             <?php
+                                            $SecimicinSayi++;
+
                                             if($DonguSayisi<$SutunAdetSayisi){
                                                 ?>
                                                 <td width="10">&nbsp;</td>
@@ -271,7 +275,7 @@ if (isset($_SESSION["Kullanici"])) {
 
 
                     <tr>
-                        <td align="left"><input type="submit" class="AlisverisiTamamlaButonu" value="Alışverişi Tamamla"></td>
+                        <td align="left"><input type="submit" class="AlisverisiTamamlaButonu" value="Ödeme Seçimi"></td>
                     </tr>
                 </table>
             </td>

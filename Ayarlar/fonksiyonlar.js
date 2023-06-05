@@ -14,4 +14,19 @@ $(document).ready(function () {
     }
 
 
+
+    $.KrediKartiSecildi = function () {
+     $(".KKAlanlari").css("display","block");
+     $(".BHAlanlari").css("display","none");
+
+    }
+
+    $.BankaHavalesiSecildi = function () {
+        $(".KKAlanlari").css("display","none");
+        $(".BHAlanlari").css("display","block");
+
+    }
+
+
+
 });

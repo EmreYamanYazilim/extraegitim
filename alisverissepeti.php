@@ -148,6 +148,9 @@ if (isset($_SESSION["Kullanici"])) {
                     <?php
                         }
                     } else {
+                        $SepettekiToplamUrunSayisi          = 0; // sepet boşaldığında hata vermemesi için
+                        $SepettekiToplamFiyat               = 0;// sepet boşaldığında  para değeri hata vermemesi için
+
                         ?>
 
                         <tr height="30">

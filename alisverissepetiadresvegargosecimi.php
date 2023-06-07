@@ -38,7 +38,7 @@ if (isset($_SESSION["Kullanici"])) {
     ?>
 
 
-<form action="index.php?SK=99" method="post">
+<form action="index.php?SK=99" method="POST">
     <table width="1065" align="center" border="0" cellpadding="0" cellspacing="0">
 
         <tr>
@@ -172,7 +172,7 @@ if (isset($_SESSION["Kullanici"])) {
                                 <table width="800" align="center" border="0" cellpadding="0" cellspacing="0">
                                     <tr><?php
                                         $KargoSorgusu       =   $VeritabaniBaglantisi->prepare("SELECT * FROM kargofirmalari ORDER BY id ASC");
-                                        $KargoSorgusu->execute([]);
+                                        $KargoSorgusu->execute();
                                         $KargoSayisi        =   $KargoSorgusu->rowCount();
                                         $KargoKayitlari         =   $KargoSorgusu->fetchAll(PDO::FETCH_ASSOC);
 
@@ -193,8 +193,7 @@ if (isset($_SESSION["Kullanici"])) {
                                                         <td colspan="4" align="center" ><img src="Resimler/<?php echo DonusumleriGeriDondur($KargoKaydi["KargoFirmasiLogosu"]); ?>" style="width: 150px; height: 30px;" border="0"></td>
                                                     </tr>
                                                     <tr height="25">
-                                                        <td width="25" align="center"><input type="radio"  style="height: 30px; " value="<?php echo $KargoKaydi["id"]; ?>" name="KargoSecimi" <?php if ($SecimicinSayi==1) {
-                                                             ?> checked="checked"  <?php } ?>      ></td>
+                                                        <td align="center"><input type="radio" name="KargoSecimi" <?php if($SecimicinSayi==1){ ?>checked="checked" <?php } ?> value="<?php echo DonusumleriGeriDondur($KargoKaydi["id"]); ?>"></td>
 
                                                     </tr>
                                                     <tr height="">

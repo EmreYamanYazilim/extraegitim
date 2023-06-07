@@ -1,11 +1,11 @@
 <table width="1065" height="210" align="center" bgcolor="#F9F9F9" border="0" cellpadding="0"
        cellspacing="0">
     <tr bgcolor="#0088CC">
-        <td align="center" style="color: darkred"><h2>Banka Hesaplarımız</h2></td>
+        <td align="center" style="color: darkorange"><h2>Banka Hesaplarımız</h2></td>
     </tr>
 
     <tr>
-        <td align="left"> Dödemelerinizi burdan yapabilirsiniz</td>
+        <td align="left"> ödemelerinizi burdan yapabilirsiniz</td>
     </tr>
 
     <tr>
@@ -31,10 +31,10 @@
                     ?>
 
 
-                    <td width="340" bgcolor="#CCCCCC">
-                        <table align="center" cellspacing="0" cellpadding="0">
+                    <td width="340" bgcolor="#f5f5f5">
+                        <table align="center" cellspacing="0" cellpadding="0" ">
                             <tr>
-                                <td colspan="3">
+                                <td  colspan="3">
                                     <img src="Resimler/<?php echo DonusumleriGeriDondur($Kayit["BankaLogosu"]) ?>" alt="">
                                 </td>
                             </tr>
@@ -87,14 +87,14 @@
 
                         <?php
                         if ($DonguSayisi<$SutunAdetSayisi) {?>
-                            <td width="20">&nbsp;</td>
+                            <td  width="20"   >&nbsp;</td>
                         <?php
                         }
                         ?>
                     <?php
                         $DonguSayisi++;
                         if ($DonguSayisi>$SutunAdetSayisi){
-                            echo "</tr><tr>";
+                            echo "</tr> <td style='background: #0088CC'>&nbsp;</td><tr>";
                             $DonguSayisi=1;
                         }
 

@@ -88,30 +88,29 @@ if (isset($_SESSION["Kullanici"])) {
                     $UrununToplamKargoFiyati = ($UrunKargoUcreti * $SepettekiUrunAdedi);
 
 
-                    $SiparisEkle = $VeritabaniBaglantisi->prepare("INSERT INTO siparisler (UyeId, SiparisNumarasi, UrunId, UrunTuru, UrunAdi, UrunFiyati, KdvOrani ,UrunAdedi, ToplamUrunFiyati, KargoFirmasiSecimi, KargoUcreti, UrunResmiBir, VaryantBasligi, VaryantSecimi, AdresAdiSoyadi, AdresDetay, AdresTelefon, OdemeSecimi, TaksitSecimi, SiparisTarihi, SiparisIpAdresi) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $SiparisEkle->execute([$SepettekiUyeId, $SepetSepetNumarasi, $SepettekiUrunId, $UrunTuru, $UrunAdi, $UrunFiyatiHesapla, $UrunKdvOrani, $SepettekiUrunAdedi, $UrnunToplamFiyati, $KargonunAdi, $UrununToplamKargoFiyati, $UrunResmiBir, $VaryantBasligi, $VaryantAdi, $AdresAdSoyad, $AdresToparla, $AdresTelefonNumarasi, $GelenOdemeTuruSecimi, 0, $ZamanDamgasi, $IPAdresi]);
+                    $SiparisEkle = $VeritabaniBaglantisi->prepare("INSERT INTO siparisler (UyeId, SiparisNumarasi, UrunId, UrunTuru, UrunAdi, UrunFiyati, KdvOrani ,UrunAdedi, ToplamUrunFiyati, KargoFirmasiSecimi, KargoUcreti, UrunResmiBir, VaryantBasligi, VaryantSecimi, AdresAdiSoyadi, AdresDetay, AdresTelefon, OdemeSecimi, TaksitSecimi, SiparisTarihi, SiparisIpAdresi, KargoDurumu) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $SiparisEkle->execute([$SepettekiUyeId, $SepetSepetNumarasi, $SepettekiUrunId, $UrunTuru, $UrunAdi, $UrunFiyatiHesapla, $UrunKdvOrani, $SepettekiUrunAdedi, $UrnunToplamFiyati, $KargonunAdi, $UrununToplamKargoFiyati, $UrunResmiBir, $VaryantBasligi, $VaryantAdi, $AdresAdSoyad, $AdresToparla, $AdresTelefonNumarasi, $GelenOdemeTuruSecimi, 0, $ZamanDamgasi, $IPAdresi, 0]);
                     $EklemeKontrol = $SiparisEkle->rowCount();
 
 
 
 
-////                 sipariş işle  ve sepetten sil
-//                    if($EklemeKontrol>0){
-//                        $SepettenSilmeSorgusu	=	$VeritabaniBaglantisi->prepare("DELETE FROM sepet WHERE id = ? AND UyeId = ? LIMIT 1");
-//                        $SepettenSilmeSorgusu->execute([$SepetIdsi, $SepettekiUyeId]);
-//
-//                        $UrunSatisiArttirmaSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET ToplamSatisSayisi=ToplamSatisSayisi + ? WHERE id = ?");
-//                        $UrunSatisiArttirmaSorgusu->execute([$SepettekiUrunAdedi, $SepettekiUrunId]);
-//
-//                        $StokGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunvaryantlari SET StokAdedi=StokAdedi - ? WHERE id = ? LIMIT 1");
-//                        $StokGuncellemeSorgusu->execute([$SepettekiUrunAdedi, $SepettekiVaryantId]);
-//                    }else{
-//                        header("Location:index.php?SK=102");
-//                        exit();
-//                    }
-//
+//                 sipariş işleme  ve sepetten silme bölümü
+                    if($EklemeKontrol>0){
+                        $SepettenSilmeSorgusu	=	$VeritabaniBaglantisi->prepare("DELETE FROM sepet WHERE id = ? AND UyeId = ? LIMIT 1");
+                        $SepettenSilmeSorgusu->execute([$SepetIdsi, $SepettekiUyeId]);
+//                        toplam satış sayısı düzenleme ve stok adedi eksiltme bölümü
+                        $UrunSatisiArttirmaSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET ToplamSatisSayisi=ToplamSatisSayisi + ? WHERE id = ?");
+                        $UrunSatisiArttirmaSorgusu->execute([$SepettekiUrunAdedi, $SepettekiUrunId]);
+
+                        $StokGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunvaryantlari SET StokAdedi=StokAdedi - ? WHERE id = ? LIMIT 1");
+                        $StokGuncellemeSorgusu->execute([$SepettekiUrunAdedi, $SepettekiVaryantId]);
+                    }else{
+                        header("Location:index.php?SK=102");
+                        exit();
+                    }
+
                 }
-//
 
 
 
@@ -121,20 +120,13 @@ if (isset($_SESSION["Kullanici"])) {
                 $KargoFiyatiKaydi                 = $KargoFiyatiIcınSiparislerSorgusu->fetch(PDO::FETCH_ASSOC);
                 $ToplamUcretimiz                  = $KargoFiyatiKaydi["ToplamUcret"];
 
-
-
                 if ($ToplamUcretimiz>=$UcretsizKargoBaraji){
                     $SiparisGuncelle = $VeritabaniBaglantisi->prepare("UPDATE siparisler SET KargoUcreti = ? WHERE UyeId = ? AND SiparisNumarasi = ?");
                     $SiparisGuncelle->execute([0,$KullaniciID ,$SepetSepetNumarasi]);
-
-
                 }
 
-
-
-
-//                header("Location:index.php?SK=101");
-//                exit();
+                header("Location:index.php?SK=101");
+                exit();
 
             } else {
                 header("Location:index.php");
@@ -142,10 +134,24 @@ if (isset($_SESSION["Kullanici"])) {
             }
 
         } else {
-            if ($GelenTaksitSecimi!="") {// taksit seçimi için sorgu
+//               kredi kartı taksit seçimi için sorgu
+            if ($GelenTaksitSecimi!="") {
 
-                echo "kredikartı işlemleri";
 
+                $SepetiGuncelle = $VeritabaniBaglantisi->prepare("UPDATE sepet SET OdemeSecimi = ? , TaksitSecimi = ? WHERE UyeId = ? ");
+                $SepetiGuncelle->execute([$GelenOdemeTuruSecimi, $GelenTaksitSecimi, $KullaniciID]);
+                $SepetKaydi     = $SepetiGuncelle->rowCount();
+
+
+
+                if ($SepetKaydi>0) {
+
+                    header("Location:index.php?SK=103");
+                    exit();
+                } else {
+                    header("Location:index.php");
+                    exit();
+                }
 
             } else {
                 header("Location:index.php");
@@ -153,6 +159,8 @@ if (isset($_SESSION["Kullanici"])) {
             }
 
         }
+
+
 
     } else {
         header("Location:index.php");

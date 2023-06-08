@@ -1,7 +1,6 @@
 <?php
 if (isset($_SESSION["Kullanici"])) {
 
-
     $StokIcinSepettekiUrunlerSorgusu    =      $VeritabaniBaglantisi->prepare("SELECT * FROM sepet WHERE UyeId = ?");
     $StokIcinSepettekiUrunlerSorgusu->execute([$KullaniciID]);
     $StokIcinSepettekiUrunlerSayisi     =      $StokIcinSepettekiUrunlerSorgusu->rowCount();
@@ -33,6 +32,12 @@ if (isset($_SESSION["Kullanici"])) {
             }
         }
     }
+
+    // hiçbirşey  değişmeden  sepetteki seçilenlerin tekrarı  yapıldığında ana sayfaya atmaması için sıfırlama yaptım etkilenen birşey olmadığı için ana sayfaya atıyor... sorgu ile sepete tıkladığım anda  hepsini tekrar sıfırlayarak baştan seçme imkanı ve işlemin patlamasını durdurduk
+    $SepetSifirlamaSorgusu = $VeritabaniBaglantisi->prepare("UPDATE sepet SET AdresId = ? , KargoId = ? , OdemeSecimi = ? , TaksitSecimi = ? WHERE UyeId = ? ");
+    $SepetSifirlamaSorgusu->execute([0, 0, "", 0, $KullaniciID]);
+
+
 
 
     ?>

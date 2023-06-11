@@ -10,6 +10,7 @@
                 <tr height="186">
                     <td><img src="Resimler/<?php echo $BannerKaydi["BannerResmi"]; ?>" border="0"></td>
                 </tr>
+                <?php
                 $BannerGuncelle		=	$VeritabaniBaglantisi->prepare("UPDATE bannerlar SET GosterimSayisi=GosterimSayisi+1 WHERE id = ? LIMIT 1");
                 $BannerGuncelle->execute([$BannerKaydi["id"]]);
                 ?>

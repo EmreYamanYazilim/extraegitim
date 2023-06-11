@@ -112,7 +112,7 @@ if (isset($_REQUEST["SYF"])){
     <!-- Body-->
     <tr>
         <td valign="top" align="center" width="1065">
-            BANNER - İÇERİK
+<!--            BANNER - İÇERİK-->
 
             <?php
             if((!$SayfaKoduDegeri) or ($SayfaKoduDegeri=="") or ($SayfaKoduDegeri==0)){

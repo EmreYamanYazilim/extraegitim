@@ -8,6 +8,8 @@ if(isset($_SESSION["Kullanici"])){
     $ToplamKayitSayisiSorgusu				=	$ToplamKayitSayisiSorgusu->rowCount();
     $SayfalamayaBaslanacakKayitSayisi		=	($Sayfalama*$SayfaBasinaGosterilecekKayitSayisi)-$SayfaBasinaGosterilecekKayitSayisi;
     $BulunanSayfaSayisi						=	ceil($ToplamKayitSayisiSorgusu/$SayfaBasinaGosterilecekKayitSayisi);
+
+
     ?>
     <table width="1065" align="center" border="0" cellpadding="0" cellspacing="0">
         <tr>
@@ -44,11 +46,12 @@ if(isset($_SESSION["Kullanici"])){
                         <td width="125" style="background: #f8ffa7; color: black;" align="left">&nbsp;Sipariş Numarası</td>
                         <td width="75" style="background: #f8ffa7; color: black;" align="left">Resim</td>
                         <td width="50" style="background: #f8ffa7; color: black;" align="left">Yorum</td>
-                        <td width="415" style="background: #f8ffa7; color: black;" align="center">Adı</td>
+                        <td width="400" style="background: #f8ffa7; color: black;" align="center">Adı</td>
                         <td width="100" style="background: #f8ffa7; color: black;" align="left">Fiyatı</td>
-                        <td width="50" style="background: #f8ffa7; color: black;" align="left">Adet</td>
+                        <td width="25" style="background: #f8ffa7; color: black;" align="left">Adet</td>
+                        <td width="100" style="background: #f8ffa7; color: black;" align="center">Kargo Ücreti</td>
                         <td width="100" style="background: #f8ffa7; color: black;" align="left">Toplam Fiyat</td>
-                        <td width="150" style="background: #f8ffa7; color: black;" align="left">Kargo Durumu / Takip</td>
+                        <td width="100" style="background: #f8ffa7; color: black;" align="left">Kargo Durumu / Takip</td>
                     </tr>
                     <?php
                     $SiparisNumaralariSorgusu		=	$VeritabaniBaglantisi->prepare("SELECT DISTINCT SiparisNumarasi FROM siparisler WHERE UyeId = ? ORDER BY SiparisNumarasi DESC LIMIT $SayfalamayaBaslanacakKayitSayisi, $SayfaBasinaGosterilecekKayitSayisi");
@@ -56,7 +59,11 @@ if(isset($_SESSION["Kullanici"])){
                     $SiparisNumaralariSayisi		=	$SiparisNumaralariSorgusu->rowCount();
                     $SiparisNumaralariKayitlari		=	$SiparisNumaralariSorgusu->fetchAll(PDO::FETCH_ASSOC);
 
+
+
                     if($SiparisNumaralariSayisi>0){
+
+
                         foreach($SiparisNumaralariKayitlari as $SiparisNumaralariSatirlar){
                             $SiparisNo		=	DonusumleriGeriDondur($SiparisNumaralariSatirlar["SiparisNumarasi"]);
 
@@ -80,16 +87,27 @@ if(isset($_SESSION["Kullanici"])){
                                 }else{
                                     $KargoDurumuYazdir	=	DonusumleriGeriDondur($SiparisSatirlar["KargoGonderiKodu"]);
                                 }
+
+                                $UrunId                              = $SiparisSatirlar["UrunId"];
+                                $KargoUcretiToplam                   = $SiparisSatirlar["KargoUcreti"];
+                                $ToplamFiyat                         = $SiparisSatirlar["ToplamUrunFiyati"];
+                                $ToplamFiyatVeKargoUcreti            = $ToplamFiyat+$KargoUcretiToplam;
+                                $ToplamFiyatVeKargoUcretiBicimlendir = FiyatBicimlendir($ToplamFiyatVeKargoUcreti)
+
+
+
+
                                 ?>
                                 <tr height="30">
                                     <td width="125" align="left">&nbsp;#<?php echo DonusumleriGeriDondur($SiparisSatirlar["SiparisNumarasi"]); ?></td>
-                                    <td width="75" align="left"><img src="Resimler/UrunResimleri/<?php echo $ResimKlasoruAdi; ?>/<?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunResmiBir"]); ?>" border="0" width="60" height="80"></td>
+                                    <td width="60" align="left"><img src="Resimler/UrunResimleri/<?php echo $ResimKlasoruAdi; ?>/<?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunResmiBir"]); ?>" border="0" width="60" height="80"></td>
                                     <td width="50" align="left"><a href="index.php?SK=75&UrunId=<?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunId"]); ?>"><img src="Resimler/DokumanKirmiziKalemli20x20.png" border="0"></a></td>
-                                    <td width="415" align="center"><?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunAdi"]); ?></td>
+                                    <td width="400" align="center"><a href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunId"]); ?>"><?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunAdi"]); ?></a></td>
                                     <td width="100" align="left"><?php echo FiyatBicimlendir(DonusumleriGeriDondur($SiparisSatirlar["UrunFiyati"])); ?> TL</td>
-                                    <td width="50" align="left"><?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunAdedi"]); ?></td>
-                                    <td width="100" align="left"><?php echo FiyatBicimlendir(DonusumleriGeriDondur($SiparisSatirlar["ToplamUrunFiyati"])); ?> TL</td>
-                                    <td width="150" align="left"><?php echo $KargoDurumuYazdir; ?></td>
+                                    <td width="25" align="center"><?php echo DonusumleriGeriDondur($SiparisSatirlar["UrunAdedi"]); ?></td>
+                                    <td width="40" align="center"><?php echo DonusumleriGeriDondur($KargoUcretiToplam); ?></td>
+                                    <td width="100" align="center"><?php echo $ToplamFiyatVeKargoUcretiBicimlendir; ?> TL</td>
+                                    <td width="100" align="center"><?php echo $KargoDurumuYazdir; ?></td>
                                 </tr>
                                 <?php
                             }

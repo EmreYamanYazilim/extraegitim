@@ -75,8 +75,8 @@ if (isset($_SESSION["Kullanici"])) {
         } else {
 
 
-            $UrunEklemeSorgusu = $VeritabaniBaglantisi->prepare("INSERT INTO sepet (UyeId, UrunId, SepetNumarasi, VaryantId, UrunAdedi ) values(?, ?, ?, ?, ?)");
-            $UrunEklemeSorgusu->execute([$KullaniciID, $GelenID, 1, $GelenVaryantID, 1]);
+            $UrunEklemeSorgusu = $VeritabaniBaglantisi->prepare("INSERT INTO sepet (UyeId, UrunId, VaryantId, UrunAdedi ) values(?, ?, ?, ?)");
+            $UrunEklemeSorgusu->execute([$KullaniciID, $GelenID, $GelenVaryantID, 1]);
             $UrunEklemeSayisi = $UrunEklemeSorgusu->rowCount();
             $SonidDegeri = $VeritabaniBaglantisi->lastInsertId();
 

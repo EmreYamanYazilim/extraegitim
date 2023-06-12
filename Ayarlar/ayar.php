@@ -95,17 +95,31 @@ if (isset($_SESSION["Kullanici"])){
 
 
     }else{
-//            echo "bu sorgu hatalı";
+//            echo "bu sorgu hatalı"; bu alanı kapatıyorum  kulanıcılar hata değerini görmesin
         die();
     }
-
-
 
 }
 
 
+if(isset($_SESSION["Yonetici"])){
+    $YoneticiSorgusu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM yoneticiler WHERE KullaniciAdi = ? LIMIT 1");
+    $YoneticiSorgusu->execute([$_SESSION["Yonetici"]]);
+    $YoneticiSayisi			=	$YoneticiSorgusu->rowCount();
+    $Yonetici				=	$YoneticiSorgusu->fetch(PDO::FETCH_ASSOC);
 
-
+    if($YoneticiSayisi>0){
+        $YoneticiID					=	$Yonetici["id"];
+        $YoneticiKullaniciAdi		=	$Yonetici["KullaniciAdi"];
+        $YoneticiSifre				=	$Yonetici["Sifre"];
+        $YoneticiIsimSoyisim		=	$Yonetici["IsimSoyisim"];
+        $YoneticiEmailAdresi		=	$Yonetici["EmailAdresi"];
+        $YoneticiTelefonNumarasi	=	$Yonetici["TelefonNumarasi"];
+    }else{
+        //echo "Yönetici Sorgusu Hatalı"; // Bu alanı kapatıyoruz çünkü site hata yaparsa kullanıcılar hata değerini görmesin.
+        die();
+    }
+}
 
 
 

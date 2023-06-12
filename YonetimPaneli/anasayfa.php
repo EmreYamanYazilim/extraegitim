@@ -1,0 +1,2 @@
+yönetici Ana sayfa bölümü
+

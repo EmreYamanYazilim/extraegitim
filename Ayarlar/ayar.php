@@ -13,7 +13,7 @@ $AyarlarSorgusu->execute();
 $AyarlarSayisi = $AyarlarSorgusu->rowCount();
 $Ayarlar = $AyarlarSorgusu->fetch(PDO::FETCH_ASSOC);
 
-if ($AyarlarSayisi > 0) {
+if ($AyarlarSayisi>0) {
 
     $SiteAdi                = $Ayarlar["SiteAdi"];
     $SiteTitle              = $Ayarlar["SiteTitle"];
@@ -21,12 +21,13 @@ if ($AyarlarSayisi > 0) {
     $SiteKeywords           = $Ayarlar["SiteKeywords"];
     $SiteCopyrightMetni     = $Ayarlar["SiteCopyrightMetni"];
     $SiteLogosu             = $Ayarlar["SiteLogosu"];
+    $SiteLinki				= $Ayarlar["SiteLinki"];
     $SiteEmailAdresi		= $Ayarlar["SiteEmailAdresi"];
     $SiteEmailSifresi		= $Ayarlar["SiteEmailSifresi"];
     $SiteEmailHostAdresi	= $Ayarlar["SiteEmailHostAdresi"];
     $SosyalLinkFacebook     = $Ayarlar["SosyalLinkFacebook"];
     $SosyalLinkTwitter      = $Ayarlar["SosyalLinkTwitter"];
-    $SosyalLinkİnstegram    = $Ayarlar["SosyalLinkİnstegram"];
+    $SosyalLinkInstegram    = $Ayarlar["SosyalLinkInstegram"];
     $SosyalLinkYoutube      = $Ayarlar["SosyalLinkYoutube"];
     $SosyalLinkLinkedin     = $Ayarlar["SosyalLinkLinkedin"];
     $SosyalLinkPinterest    = $Ayarlar["SosyalLinkPinterest"];

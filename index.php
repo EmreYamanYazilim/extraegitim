@@ -214,7 +214,7 @@ if (isset($_REQUEST["SYF"])){
                             <td><a href="xxxxx"><b>&nbsp;</b></a></td>
                             <td><a href="index.php?SK=6"><b>Teslimat</b></a></td>
                             <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                            <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkİnstegram);  ?>" target="_blank"><img src="Resimler/Instagram16x16.png" alt="">instagram</a></td>
+                            <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkInstegram);  ?>" target="_blank"><img src="Resimler/Instagram16x16.png" alt="">instagram</a></td>
                             </tr>
                             <tr>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>

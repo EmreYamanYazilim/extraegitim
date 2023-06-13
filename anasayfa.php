@@ -75,10 +75,10 @@
                             $EnYeniPuanResmi	=	"YildizCizgiliBesDolu.png";
                         }
                         ?>
-                        <td width="205" valign="top">
-                            <table width="205" align="left" border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 10px;">
+                        <td width="205" valign="top" >
+                            <table width="205" align="left" border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 10px;" >
                                 <tr height="40">
-                                    <td align="center"><a href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($EnYeniUrunSatirlari["id"]); ?>"><img src="Resimler/UrunResimleri/<?php echo $EnYeniUrunResimKlasoru; ?>/<?php echo DonusumleriGeriDondur($EnYeniUrunSatirlari["UrunResmiBir"]); ?>" border="0" width="205" height="273"></a></td>
+                                    <td align="center"><a href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($EnYeniUrunSatirlari["id"]); ?>"><img src="Resimler/UrunResimleri/<?php echo $EnYeniUrunResimKlasoru; ?>/<?php echo DonusumleriGeriDondur($EnYeniUrunSatirlari["UrunResmiBir"]); ?>" border="0" width="200" height="273"></a></td>
                                 </tr>
                                 <tr height="25">
                                     <td width="205" align="center"><a href="index.php?SK=83&ID=<?php echo DonusumleriGeriDondur($EnYeniUrunSatirlari["id"]); ?>" style="color: #FF9900; font-weight: bold; text-decoration: none;"><?php echo  DonusumleriGeriDondur($EnYeniUrununTuru); ?></a></td>

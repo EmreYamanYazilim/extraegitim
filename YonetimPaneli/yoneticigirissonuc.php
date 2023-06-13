@@ -25,7 +25,7 @@ if (empty($_SESSION["Yonetici"])) {
 
         if ($KullaniciSayisi>0) {
             $_SESSION["Yonetici"]   = $GelenYKullanici;
-            header("Location:index.php?SKD=0");  /* işlem başarılıysa sayfa kodları içi olan ana sayfa   */
+            header("Location:index.php?SKD=0&SKI=0");  /* işlem başarılıysa sayfa kodları içi olan ana sayfa   */
             exit();
 
         } else {

@@ -36,7 +36,7 @@ if ($AyarlarSayisi>0) {
     $UcretsizKargoBaraji    = $Ayarlar["UcretsizKargoBaraji"];
     $ClientID               = $Ayarlar["ClientID"];
     $StoreKey               = $Ayarlar["StoreKey"];
-    $ApiKullanicisi           = $Ayarlar["ApiKullanicisi"];
+    $ApiKullanicisi         = $Ayarlar["ApiKullanicisi"];
     $ApiSifresi             = $Ayarlar["ApiSifresi"];
 
 

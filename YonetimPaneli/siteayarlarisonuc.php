@@ -1,5 +1,8 @@
 <?php
 if(isset($_SESSION["Yonetici"])){
+
+
+
     if(isset($_POST["SiteAdi"])){
         $GelenSiteAdi				=	Guvenlik($_POST["SiteAdi"]);
     }else{
@@ -117,19 +120,76 @@ if(isset($_SESSION["Yonetici"])){
         $AyarlariGuncelle			=	$VeritabaniBaglantisi->prepare("UPDATE ayarlar SET SiteAdi = ?, SiteTitle = ?, SiteDescription = ?, SiteKeywords = ?, SiteCopyrightMetni = ?, SiteLinki = ?, SiteEmailAdresi = ?, SiteEmailSifresi = ?, SiteEmailHostAdresi = ?, SosyalLinkFacebook = ?, SosyalLinkTwitter = ?, SosyalLinkLinkedin = ?, SosyalLinkInstegram = ?, SosyalLinkPinterest = ?, SosyalLinkYoutube = ?, DolarKuru = ?, EuroKuru = ?, UcretsizKargoBaraji = ?, ClientID = ?, StoreKey = ?, ApiKullanicisi = ?, ApiSifresi = ?");
         $AyarlariGuncelle->execute([$GelenSiteAdi, $GelenSiteTitle, $GelenSiteDescription, $GelenSiteKeywords, $GelenSiteCopyrightMetni, $GelenSiteLinki, $GelenSiteEmailAdresi, $GelenSiteEmailSifresi, $GelenSiteEmailHostAdresi, $GelenSosyalLinkFacebook, $GelenSosyalLinkTwitter, $GelenSosyalLinkLinkedin, $GelenSosyalLinkInstagram, $GelenSosyalLinkPinterest, $GelenSosyalLinkYouTube, $GelenDolarKuru, $GelenEuroKuru, $GelenUcretsizKargoBaraji, $GelenClientID, $GelenStoreKey, $GelenApiKullanicisi, $GelenApiSifresi]);
 
-        $GuncellemeSay = $AyarlariGuncelle->rowCount();
-        if ($GuncellemeSay > 0){
-            echo "tamam";
-
-        }
 
 
+//      resim dosyası gelirse biçimlendirmek için verot eklemedim
+        if (($GelenSiteLogosu["name"]!="") and ($GelenSiteLogosu["type"]!="") and ($GelenSiteLogosu["tmp_name"]!="") and ($GelenSiteLogosu["error"]==0) and ($GelenSiteLogosu["size"]>0)) {
 
-//        header("Location:index.php?SKD=0&SKI=3");
-//        exit();
-//    }else{
-//        header("Location:index.php?SKD=0&SKI=4");
-//        exit();
+            $SiteLogosuYukle = new \Verot\Upload\Upload($GelenSiteLogosu, "tr-TR");
+
+            if ($SiteLogosuYukle->uploaded) {
+                    $SiteLogosuYukle->allowed = array("image/*"); // bütün resim dosyalarını kabul et dedik
+                    $SiteLogosuYukle->mime_check = true; // gelen dosyanın mime türünü image yazan yerdeki mime türüne check ediyor farklı türlerde bişi gelrise onu hataya çeviriyor image dediğim için tüm türler gelsin dedim
+                    $SiteLogosuYukle->file_overwrite = true; //  aynı isimli dosya geldimi üstüne yaz
+                    $SiteLogosuYukle->image_background_color = null; // arka plan resmini boş bıraktık png falan gelirse arka planı boyamasın
+                    $SiteLogosuYukle->image_convert = "png";
+                    $SiteLogosuYukle->image_quality = 100;
+                    $SiteLogosuYukle->image_resize = true;
+                    $SiteLogosuYukle->image_x = 150; // genişlik
+                    $SiteLogosuYukle->image_y = 50; //yükseklik
+                    $SiteLogosuYukle->file_new_name_body = 'logo'; //isimlendirme
+                    $SiteLogosuYukle->process($VerotIcinKlasorYolu);//klasor yolu fonksiyon.php de birleştirerek aldım
+                    if ($SiteLogosuYukle->processed) {
+
+                        $SiteLogosuYukle->clean();
+                    } else {
+                        header("Location:index.php?SKD=0&SKI=4"); // yükleme gerçekleşmediyse hata alanı
+                        exit();
+                    }
+                }
+            }
+
+        // VEROT
+//                $foo = new Upload($_FILES['form_field']);
+//                if ($foo->uploaded) {
+//                    // save uploaded image with no changes
+//                    $foo->process('/home/user/files/');
+//                    if ($foo->processed) {
+//                        echo 'original image copied';
+//                    } else {
+//                        echo 'error : ' . $foo->error;
+//                    }
+//                    // save uploaded image with a new name
+//                    $foo->file_new_name_body = 'foo';
+//                    $foo->process('/home/user/files/');
+//                    if ($foo->processed) {
+//                        echo 'image renamed "foo" copied';
+//                    } else {
+//                        echo 'error : ' . $foo->error;
+//                    }
+//                    // save uploaded image with a new name,
+//                    // resized to 100px wide
+//                    $foo->file_new_name_body = 'image_resized';
+//                    $foo->image_resize = true;
+//                    $foo->image_convert = 'gif';
+//                    $foo->image_x = 100;
+//                    $foo->image_ratio_y = true;
+//                    $foo->process('/home/user/files/');
+//                    if ($foo->processed) {
+//                        echo 'image renamed, resized x=100
+//           and converted to GIF';
+//                        $foo->clean();
+//                    } else {
+//                        echo 'error : ' . $foo->error;
+//                    }
+//                }
+
+            header("Location:index.php?SKD=0&SKI=3");
+            exit();
+
+    }else{
+        header("Location:index.php?SKD=0&SKI=4");
+        exit();
     }
 }else{
     header("Location:index.php?SKD=1");

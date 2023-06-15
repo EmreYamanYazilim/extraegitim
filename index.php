@@ -4,6 +4,7 @@ ob_start();
 require_once("Ayarlar/ayar.php");
 require_once("Ayarlar/fonksiyonlar.php");
 require_once ("Ayarlar/sitesayfalari.php");
+
 if(isset($_REQUEST["SK"])){
     $SayfaKoduDegeri    =   SayiliIcerikleriFilitrele($_REQUEST["SK"]);   /*  bu  filitredeki amaç urlye rakkam haricindeki yazılacak tüm değerleri hiçe sayıp sadece sayı vermesi */
 

@@ -6,6 +6,9 @@
 $IPAdresi			=	$_SERVER['REMOTE_ADDR'];
 $ZamanDamgasi		=	time();
 $TarihSaat			=	date("d.m.Y H:i:s", $ZamanDamgasi);
+$SiteKokDizini      =   $_SERVER["DOCUMENT_ROOT"];
+$ResimKlasoruYolu   =   '/extraegitim/Resimler/';//kendi localhostza göre veya internet üzerindeki alanıza göre değiştircez
+$VerotIcinKlasorYolu =   $SiteKokDizini.$ResimKlasoruYolu;
 
 function TarihBul($Deger){
     $Cevir =    date("d.m.Y H:i:s", $Deger);

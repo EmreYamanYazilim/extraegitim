@@ -4,8 +4,10 @@ ob_start();
 
 require_once("../Ayarlar/ayar.php");
 require_once("../Ayarlar/fonksiyonlar.php");
+require_once("../Frameworks/verot/src/class.upload.php");
 require_once("../Ayarlar/yonetimsayfalariic.php");
 require_once("../Ayarlar/yonetimsayfalaridis.php");
+
 
 
 if (isset($_REQUEST["SKI"])) {

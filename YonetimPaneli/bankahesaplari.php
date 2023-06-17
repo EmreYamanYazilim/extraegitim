@@ -23,7 +23,7 @@ if(isset($_SESSION["Yonetici"])){
                             <tr>
                                 <td width="200"><table width="200" align="right" border="0" cellpadding="0" cellspacing="0">
                                         <tr height="75">
-                                            <td><img src="../Resimler/<?php echo DonusumleriGeriDondur($Hesaplar["BankaLogosu"]); ?>" border="0"></td>
+                                            <td><img src="../Resimler/<?php echo DonusumleriGeriDondur($Hesaplar["BankaLogosu"]); ?>" border="0" width="100" height="50"></td>
                                         </tr>
                                         <tr height="30">
                                             <td align="left"><table width="200" align="right" border="0" cellpadding="0" cellspacing="0">
@@ -57,7 +57,7 @@ if(isset($_SESSION["Yonetici"])){
                                                                 <tr>
                                                                     <td width="180"><b>Şube ve Konum Bilgileri</b></td>
                                                                     <td width="20"><b>:</b></td>
-                                                                    <td width="340"><?php echo DonusumleriGeriDondur($Hesaplar["SubeAdi"]); ?> (<?php echo DonusumleriGeriDondur($Hesaplar["SubeKodu"]); ?>) - <?php echo DonusumleriGeriDondur($Hesaplar["KonumSehir"]); ?> / <?php echo DonusumleriGeriDondur($Hesaplar["KonumUlke"]); ?></td>
+                                                                    <td width="340"><?php echo DonusumleriGeriDondur($Hesaplar["SubeAdi"]); ?> (<?php echo DonusumleriGeriDondur($Hesaplar["SubeKodu"]); ?>) - <?php echo DonusumleriGeriDondur($Hesaplar["KonumSehri"]); ?> / <?php echo DonusumleriGeriDondur($Hesaplar["KonumUlke"]); ?></td>
                                                                 </tr>
                                                             </table></td>
                                                     </tr>

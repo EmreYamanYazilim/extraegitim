@@ -30,6 +30,8 @@ if (isset($_REQUEST["SYF"])){
     <meta name="googlebot" content="index, follow">
     <meta name="revisit-after" content="7 days">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title><?php echo DonusumleriGeriDondur($SiteTitle); ?></title>
     <link rel="icon" href="Resimler/logo.png">
     <meta name="description" content="<?php echo DonusumleriGeriDondur($SiteDescription);  ?>">

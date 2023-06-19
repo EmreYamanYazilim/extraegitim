@@ -52,7 +52,7 @@ if ($_SESSION["Kullanici"]) {
     if (($GelenIsimSoyisim != "") and ($GelenEmailAdresi != "") and ($GelenSifre != "") and ($GelenSifreTekrar != "") and ($GelenTelefonNumarasi != "") and ($GelenCinsiyet != "")) {
 
         if ($GelenSifre != $GelenSifreTekrar) {
-            header("Location:index.php?SK=57");
+            header("Location:index.php?SK=57");// uyuşmayan şifre
             exit();
         } else {
             if ($GelenSifre == "EskiSifre") {
@@ -68,7 +68,7 @@ if ($_SESSION["Kullanici"]) {
                 $KullaniciSayisi = $KontrolSorgusu->rowCount();
 
                 if ($KullaniciSayisi > 0) {
-                    header("Location:index.php?SK=55");
+                    header("Location:index.php?SK=55");// tekraralanan alan
                     exit();
                 }
             }
@@ -89,11 +89,11 @@ if ($_SESSION["Kullanici"]) {
             if ($KayitKontrol > 0) {
 
                 $_SESSION["Kullanici"] = $GelenEmailAdresi; //  e mail değişikliği yapınca sistemin atmaması için tekrar session istemek lazım
-                header("Location:index.php?SK=53");
+                header("Location:index.php?SK=53");// tamam
                 exit();
 
             } else {
-                header("Location:index.php=SK=54");
+                header("Location:index.php=SK=54");// hata
                 exit();
             }
 
@@ -101,7 +101,7 @@ if ($_SESSION["Kullanici"]) {
 
 
     } else {
-        header("Location:index.php?SK=56");
+        header("Location:index.php?SK=56");// eksik alan
         exit();
     }
 

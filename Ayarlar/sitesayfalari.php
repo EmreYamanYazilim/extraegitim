@@ -30,7 +30,6 @@ $Sayfa[27] = "yeniuyeolsonuctekrarlanan.php";
 $Sayfa[28] = "yeniuyeolsonucuyusmayansifre.php";
 $Sayfa[29] = "yeniuyeolsonuconaysizsozlesme.php";
 $Sayfa[30] = "yeniuyeolsonucaktivasyontamam.php";
-
 $Sayfa[31] = "uyegiris.php";
 $Sayfa[32] = "uyegirissonuc.php";
 $Sayfa[33] = "uyegirissonuchata.php";
@@ -43,7 +42,6 @@ $Sayfa[39] = "sifremiunuttumsonuctamam.php";
 $Sayfa[40] = "sifremiunuttumsonuchata.php";
 $Sayfa[41] = "sifremiunuttumsonucyanlisbilgi.php";
 $Sayfa[42] = "sifremiunuttumsonuceksikalan.php";
-
 $Sayfa[43] = "yenisifreolustur.php";
 $Sayfa[44] = "yenisifreolustursonuc.php";
 $Sayfa[45] = "yenisifreolustursonuctamam.php";
@@ -54,7 +52,6 @@ $Sayfa[49] = "cikis.php";
 $Sayfa[50] = "hesabimuyelikbilgilerim.php";
 $Sayfa[51] = "hesabimuyelikbilgilerimguncelle.php";
 $Sayfa[52] = "hesabimuyelikbilgilerimguncellesonuc.php";
-
 $Sayfa[53] = "hesabimuyelikbilgilerimguncellesonuctamam.php";
 $Sayfa[54] = "hesabimuyelikbilgilerimguncellesonuchata.php";
 $Sayfa[55] = "hesabimuyelikbilgilerimguncellesonuctekrarlanan.php";

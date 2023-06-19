@@ -136,7 +136,7 @@ if(isset($_SESSION["Yonetici"])){
                     $SiteLogosuYukle->image_quality = 100;
                     $SiteLogosuYukle->image_resize = true;
                     $SiteLogosuYukle->image_x = 150; // genişlik
-                    $SiteLogosuYukle->image_y = 50; //yükseklik
+                    $SiteLogosuYukle->image_y = 150; //yükseklik
                     $SiteLogosuYukle->file_new_name_body = 'logo'; //isimlendirme
                     $SiteLogosuYukle->process($VerotIcinKlasorYolu);//klasor yolu fonksiyon.php de birleştirerek aldım
                     if ($SiteLogosuYukle->processed) {

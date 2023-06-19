@@ -86,4 +86,17 @@ function FiyatBicimlendir($Deger) {
         return $Sonuc;
 }
 
+
+function  ResimAdiOlustur(){
+    $Sonuc  =  substr(md5(uniqid(time())),0,25 );  //time ile zaman damgamızı buldum.zamandamgamızı uniqid ile benzersiz değer ürettim sonra md5 içine alarak  kriptolama mantığına soktum.substr ile sıfırdan başla 25 kareakter al dedim benzersiz isim oluşturudm
+    return $Sonuc;
+}
+
+
+
+
+
+
+
+
 ?>

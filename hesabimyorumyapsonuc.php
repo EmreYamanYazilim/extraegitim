@@ -25,8 +25,7 @@ if (isset($_SESSION["Kullanici"])){
         if ($YorumKayiKontrol>0) {
 
             $UrunGuncellemeSorgusu = $VeritabaniBaglantisi->prepare("UPDATE urunler SET YorumSayisi=YorumSayisi+1, ToplamYorumPuani=ToplamYorumPuani+? WHERE id = ? LIMIT 1");
-            $UrunGuncellemeSorgusu->execute([$GelenPuan, $KullaniciID
-            ]);
+            $UrunGuncellemeSorgusu->execute([$GelenPuan, $KullaniciID]);
             $UrunGuncellemeKontrol = $UrunGuncellemeSorgusu->rowCount();
             if ($UrunGuncellemeKontrol > 0) {
                 header("Location:index.php?SK=77");

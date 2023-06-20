@@ -16,7 +16,7 @@ if(isset($_SESSION["Yonetici"])){
 
 
     ?>
-    <form action="index.php?SKD=0&SKI=15&ID=<?php echo DonusumleriGeriDondur($BankaHesaplarKayirlari["id"]);?>" method="POST" enctype="multipart/form-data" >
+    <form action="index.php?SKD=0&SKI=15&ID=<?php echo DonusumleriGeriDondur($BankaHesaplarKayirlari["id"])?>" method="POST" enctype="multipart/form-data" >
         <table width="760" align="center" border="0" cellpadding="0" cellspacing="0">
             <tr height="70">
                 <td width="560" bgcolor="#FF9900" style="color: #FFFFFF;" align="left"><h3>&nbsp;BANKA HESAP AYARLARI</h3></td>
@@ -50,7 +50,7 @@ if(isset($_SESSION["Yonetici"])){
                         <tr height="40">
                             <td width="230">Bankanın Bulunduğu Şehir</td>
                             <td width="20">:</td>
-                            <td width="500"><input type="text" name="KonumSehir"  value="<?php echo DonusumleriGeriDondur($BankaHesaplarKayirlari["KonumSehri"]) ?>" class="InputAlanlari"></td>
+                            <td width="500"><input type="text" name="KonumSehri"  value="<?php echo DonusumleriGeriDondur($BankaHesaplarKayirlari["KonumSehri"]) ?>" class="InputAlanlari"></td>
                         </tr>
                         <tr height="40">
                             <td width="230">Bankanın Bulunduğu Ülke</td>

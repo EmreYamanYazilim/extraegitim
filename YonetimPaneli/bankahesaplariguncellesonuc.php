@@ -2,13 +2,13 @@
 
 if (isset($_SESSION["Yonetici"])) {
 
-    $GelenBankaLogosu = $_FILES["BankaLogosu"];
-
     if (isset($_GET["ID"])){
         $GelenID    =   Guvenlik($_GET["ID"]);
     }else{
         $GelenID    =   "";
     }
+    $GelenBankaLogosu = $_FILES["BankaLogosu"];
+
     if (isset($_POST["BankaAdi"])) {
         $GelenBankaAdi      =   Guvenlik($_POST["BankaAdi"]);
     }else{
@@ -24,8 +24,8 @@ if (isset($_SESSION["Yonetici"])) {
     }else{
         $GelenSubeKodu      =   "";
     }
-    if (isset($_POST["KonumSehir"])) {
-        $GelenKonumSehir     =   Guvenlik($_POST["KonumSehir"]);
+    if (isset($_POST["KonumSehri"])) {
+        $GelenKonumSehir     =   Guvenlik($_POST["KonumSehri"]);
     }else{
         $GelenKonumSehir      =   "";
     }
@@ -61,15 +61,15 @@ if (isset($_SESSION["Yonetici"])) {
         $BankaGuncellemeSorgusu->execute([$GelenBankaAdi, $GelenKonumSehir, $GelenKonumUlke, $GelenSubeAdi, $GelenSubeKodu, $GelenParaBirimi, $GelenHesapSahibi, $GelenHesapNumarasi, $GelenIbanNumarasi, $GelenID]);
         $BankaGuncellemeKotnrol = $BankaGuncellemeSorgusu->rowCount();
 
-        if (($GelenBankaLogosu["name"]!="") and ($GelenBankaLogosu["type"]!="") and ($GelenBankaLogosu["tmp_name"]!="") and ($GelenBankaLogosu["error"] == 0) and ($GelenBankaLogosu["size"]>0)) {
+        if(($GelenBankaLogosu["name"]!="") and ($GelenBankaLogosu["type"]!="") and ($GelenBankaLogosu["tmp_name"]!="") and ($GelenBankaLogosu["error"]==0) and ($GelenBankaLogosu["size"]>0)){
             $BankaResmiSorgusu = $VeritabaniBaglantisi->prepare("SELECT * FROM bankahesaplarimiz WHERE id = ? LIMIT 1");
             $BankaResmiSorgusu->execute([$GelenID]);
             $ResimKontrol = $BankaResmiSorgusu->rowCount();
             $ResimBilgisi = $BankaResmiSorgusu->fetch(PDO::FETCH_ASSOC);
 
-            $SilinecekDosyaYolu =  "../Resimler/".$ResimBilgisi["BankaLogosu"];
+            $SilinecekDosyaYolu		=	"../Resimler/".$ResimBilgisi["BankaLogosu"];
+             unlink($SilinecekDosyaYolu);
 
-            unlink($SilinecekDosyaYolu);
 
              $ResimIcinDosyaAdi = ResimAdiOlustur();
              $GelenResminUzantisi = substr($GelenBankaLogosu["name"], -4); // gelen isimin son 4 tanesini çıkarıp ver dedik  png gif jpg yada jpeg gelebilir

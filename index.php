@@ -29,8 +29,8 @@ if (isset($_REQUEST["SYF"])){
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <meta name="revisit-after" content="7 days">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title><?php echo DonusumleriGeriDondur($SiteTitle); ?></title>
     <link rel="icon" href="Resimler/logo.png">
@@ -39,6 +39,7 @@ if (isset($_REQUEST["SYF"])){
     <script type="text/javascript" src="Frameworks/JQery/jquery-3.3.1.min.js" language="JavaScript"></script>
     <link type="text/css" rel="stylesheet" href="Ayarlar/stil.css">
     <script type="text/javascript" src="Ayarlar/fonksiyonlar.js"></script>
+    
 
 </head>
 <body>
@@ -267,6 +268,8 @@ if (isset($_REQUEST["SYF"])){
     </tr>
 
 </table>
+
+
 
 </body>
 </html>

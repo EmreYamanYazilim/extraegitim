@@ -1,6 +1,5 @@
 <?php
 if(isset($_SESSION["Yonetici"])){
-    // Arama içeriği email isimsoyuisim ve telefon numaası oldaklı
 	if(isset($_REQUEST["AramaIcerigi"])){
 		$GelenAramaIcerigi	=	Guvenlik($_REQUEST["AramaIcerigi"]);
 		$AramaKosulu		=	 " AND (EmailAdresi LIKE '%" . $GelenAramaIcerigi . "%' OR IsimSoyisim LIKE '%" . $GelenAramaIcerigi . "%' OR TelefonNumarasi LIKE '%" . $GelenAramaIcerigi . "%' ) ";
@@ -13,15 +12,15 @@ if(isset($_SESSION["Yonetici"])){
 	$SayfalamaIcinSolVeSagButonSayisi		=	2;
 	$SayfaBasinaGosterilecekKayitSayisi		=	10;
 	$ToplamKayitSayisiSorgusu				=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler WHERE SilinmeDurumu = ? $AramaKosulu ORDER BY id DESC");
-	$ToplamKayitSayisiSorgusu->execute([0]);
+	$ToplamKayitSayisiSorgusu->execute([1]);
 	$ToplamKayitSayisiSorgusu				=	$ToplamKayitSayisiSorgusu->rowCount();
-	$SayfalamayaBaslanacakKayitSayisi		=	($Sayfalama*$SayfaBasinaGosterilecekKayitSayisi)-$SayfaBasinaGosterilecekKayitSayisi;// sayfalama indexte
+	$SayfalamayaBaslanacakKayitSayisi		=	($Sayfalama*$SayfaBasinaGosterilecekKayitSayisi)-$SayfaBasinaGosterilecekKayitSayisi;
 	$BulunanSayfaSayisi						=	ceil($ToplamKayitSayisiSorgusu/$SayfaBasinaGosterilecekKayitSayisi);
 ?>
 <table width="760" align="center" border="0" cellpadding="0" cellspacing="0">
 	<tr height="70">
 		<td width="560" bgcolor="#FF9900" style="color: #FFFFFF;" align="left"><h3>&nbsp;ÜYELER</h3></td>
-		<td width="200" bgcolor="#FF9900" align="right"><a href="index.php?SKD=0&SKI=83" style="color: #FFFFFF; text-decoration: none;">Silinmiş Üyeler&nbsp;</a></td>
+		<td width="200" bgcolor="#FF9900" align="right"><a href="index.php?SKD=0&SKI=82" style="color: #FFFFFF; text-decoration: none;">Aktif Üyeler&nbsp;</a></td>
 	</tr>
 	<tr height="10">
 		<td colspan="2" style="font-size: 10px;">&nbsp;</td>
@@ -29,7 +28,7 @@ if(isset($_SESSION["Yonetici"])){
 	<tr>
 		<td colspan="2"><table width="750" align="right" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td><div class="AramaAlani"><form action="index.php?SKD=0&SKI=82" method="post">
+				<td><div class="AramaAlani"><form action="index.php?SKD=0&SKI=83" method="post">
 					<div class="AramaAlaniButonKapsamaAlani">
 						<input type="submit" value="" class="AramaAlaniButonu">
 					</div>
@@ -45,7 +44,7 @@ if(isset($_SESSION["Yonetici"])){
 	</tr>
 	<?php
 	$UyelerSorgusu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler WHERE SilinmeDurumu = ? $AramaKosulu ORDER BY id DESC LIMIT $SayfalamayaBaslanacakKayitSayisi, $SayfaBasinaGosterilecekKayitSayisi");
-	$UyelerSorgusu->execute([0]);
+	$UyelerSorgusu->execute([1]);
 	$UyelerSayisi		=	$UyelerSorgusu->rowCount();
 	$UyelerKayitlari	=	$UyelerSorgusu->fetchAll(PDO::FETCH_ASSOC);
 	
@@ -79,9 +78,9 @@ if(isset($_SESSION["Yonetici"])){
 					<tr>
 						<td colspan="9" align="right"><table width="95" align="right" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td width="40">&nbsp;</td>
-								<td width="25" valign="top" align="left"><a href="index.php?SKD=0&SKI=84&ID=<?php echo DonusumleriGeriDondur($Uyeler["id"]); ?>"><img src="../Resimler/Sil20x20.png" border="0" style="margin-top: 5px;"></a></td>
-								<td width="30" align="left"><a href="index.php?SKD=0&SKI=84&ID=<?php echo DonusumleriGeriDondur($Uyeler["id"]); ?>" style="color: #FF0000; text-decoration: none;">Sil</a></td>
+								<td width="20">&nbsp;</td>
+								<td width="25" valign="top" align="left"><a href="index.php?SKD=0&SKI=87&ID=<?php echo DonusumleriGeriDondur($Uyeler["id"]); ?>"><img src="../Resimler/Guncelleme20x20.png" border="0" style="margin-top: 5px;"></a></td>
+								<td width="50" align="left"><a href="index.php?SKD=0&SKI=87&ID=<?php echo DonusumleriGeriDondur($Uyeler["id"]); ?>" style="color: #009900; text-decoration: none;">Geri Aç</a></td>
 							</tr>
 						</table></td>
 					</tr>
@@ -105,9 +104,9 @@ if(isset($_SESSION["Yonetici"])){
 				<div class="SayfalamaAlaniIciNumaraAlaniKapsayicisi">
 					<?php
 					if($Sayfalama>1){
-						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=82" . $SayfalamaKosulu . "&SYF=1'><<</a></span>";
+						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=83" . $SayfalamaKosulu . "&SYF=1'><<</a></span>";
 						$SayfalamaIcinSayfaDegeriniBirGeriAl	=	$Sayfalama-1;
-						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=82" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirGeriAl . "'><</a></span>";
+						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=83" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirGeriAl . "'><</a></span>";
 					}
 
 					for($SayfalamaIcinSayfaIndexDegeri=$Sayfalama-$SayfalamaIcinSolVeSagButonSayisi; $SayfalamaIcinSayfaIndexDegeri<=$Sayfalama+$SayfalamaIcinSolVeSagButonSayisi; $SayfalamaIcinSayfaIndexDegeri++){
@@ -115,15 +114,15 @@ if(isset($_SESSION["Yonetici"])){
 							if($Sayfalama==$SayfalamaIcinSayfaIndexDegeri){
 								echo "<span class='SayfalamaAktif'>" . $SayfalamaIcinSayfaIndexDegeri . "</span>";
 							}else{
-								echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=82" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaIndexDegeri . "'> " . $SayfalamaIcinSayfaIndexDegeri . "</a></span>";
+								echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=83" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaIndexDegeri . "'> " . $SayfalamaIcinSayfaIndexDegeri . "</a></span>";
 							}
 						}
 					}
 
 					if($Sayfalama!=$BulunanSayfaSayisi){
 						$SayfalamaIcinSayfaDegeriniBirIleriAl	=	$Sayfalama+1;
-						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=82" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirIleriAl . "'>></a></span>";
-						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=82" . $SayfalamaKosulu . "&SYF=" . $BulunanSayfaSayisi . "'>>></a></span>";
+						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=83" . $SayfalamaKosulu . "&SYF=" . $SayfalamaIcinSayfaDegeriniBirIleriAl . "'>></a></span>";
+						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=83" . $SayfalamaKosulu . "&SYF=" . $BulunanSayfaSayisi . "'>>></a></span>";
 					}
 					?>
 				</div>
@@ -137,7 +136,7 @@ if(isset($_SESSION["Yonetici"])){
 		<tr>
 			<td colspan="2"><table width="750" align="right" border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td width="750">Kayıtlı üye bulunmamaktadır.</td>
+					<td width="750">Silinmiş üye bulunmamaktadır.</td>
 				</tr>
 			</table></td>
 		</tr>

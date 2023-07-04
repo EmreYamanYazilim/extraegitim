@@ -144,7 +144,7 @@ if(isset($_SESSION["Yonetici"])){
 	$GelenResim2					=	$_FILES["Resim2"];
 	$GelenResim3					=	$_FILES["Resim3"];
 	$GelenResim4					=	$_FILES["Resim4"];
-	
+
 	if(($GelenUrunMenusu!="") and ($GelenUrunAdi!="") and ($GelenUrunFiyati!="") and ($GelenParaBirimi!="") and ($GelenKdvOrani!="") and ($GelenKargoUcreti!="") and ($GelenUrunAciklamasi!="") and ($GelenVaryantBasligi!="") and ($GelenVaryantAdi1!="") and ($GelenStokAdedi1!="") and ($GelenResim1["name"]!="") and ($GelenResim1["type"]!="") and ($GelenResim1["tmp_name"]!="") and ($GelenResim1["error"]==0) and ($GelenResim1["size"]>0)){
 		$MenuTuruSorgusu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM menuler WHERE id = ? LIMIT 1");
 		$MenuTuruSorgusu->execute([$GelenUrunMenusu]);
@@ -155,7 +155,7 @@ if(isset($_SESSION["Yonetici"])){
 			$ResimKlasoru	=	"UrunResimleri/Erkek/";
 		}elseif($MenuTuruKaydi["UrunTuru"] == "Kadın Ayakkabısı"){
 			$ResimKlasoru	=	"UrunResimleri/Kadin/";
-		}elseif($MenuTuruKaydi["UrunTuru"] == "Çocuk Ayakkabısı"){
+		}elseif($MenuTuruKaydi["UrunTuru"] == "Cocuk Ayakkabısı"){
 			$ResimKlasoru	=	"UrunResimleri/Cocuk/";
 		}
 		
@@ -172,9 +172,9 @@ if(isset($_SESSION["Yonetici"])){
 			$UrunEklemeKontrol		=	$UrunEklemeSorgusu->rowCount();
 		
 			if($UrunEklemeKontrol>0){
-				$SonEklenenUrununIDsi		=	$VeritabaniBaglantisi->lastInsertId();
+				$SonEklenenUrununIDsi		=	$VeritabaniBaglantisi->lastInsertId();  // varyantlar için  urun varyantlarında ekleyeceğimiz ürünün id değerini hangi ürün son eklendiğinie ait değeri alabilmek ve onu hepsi için toplu yazdırabilmek için
 				
-				$BirinciResimYukle	=	new upload($GelenResim1, "tr-TR");
+				$BirinciResimYukle	=	new \Verot\Upload\Upload($GelenResim1, "tr-TR");
 					if($BirinciResimYukle->uploaded){
 					   $BirinciResimYukle->mime_magic_check			=	true;
 					   $BirinciResimYukle->allowed					=	array("image/*");
@@ -195,17 +195,17 @@ if(isset($_SESSION["Yonetici"])){
 							exit();
 						} 
 					}		
-			
+
 				$MenuUrunSayisiGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE menuler SET UrunSayisi=UrunSayisi+1 WHERE id = ? LIMIT 1");
 				$MenuUrunSayisiGuncellemeSorgusu->execute([$GelenUrunMenusu]);
 				$MenuUrunSayisiGuncellemeKontrol	=	$MenuUrunSayisiGuncellemeSorgusu->rowCount();
-		
+
 				if($MenuUrunSayisiGuncellemeKontrol>0){
 					$BirinciVaryantEklemeSorgusu		=	$VeritabaniBaglantisi->prepare("INSERT INTO urunvaryantlari (UrunId, VaryantAdi, StokAdedi) values (?, ?, ?)");
-					$BirinciVaryantEklemeSorgusu->execute([$SonEklenenUrununIDsi, $GelenVaryantAdi1, $GelenStokAdedi1]);
+					$BirinciVaryantEklemeSorgusu->execute([$SonEklenenUrununIDsi, $GelenVaryantAdi1, $GelenStokAdedi1]);// urunId lastinsertid değeri
 					$BirinciVaryantKontrol		=	$BirinciVaryantEklemeSorgusu->rowCount();
-		
-					if($BirinciVaryantKontrol>0){
+
+					if($BirinciVaryantKontrol>0){// 1. varyant zorunlu değeri dışındakiler boş gelmezse  eklemeyi yapması için ekledim
 						if(($GelenVaryantAdi2!="") and ($GelenStokAdedi2!="")){
 							$IkinciVaryantEklemeSorgusu		=	$VeritabaniBaglantisi->prepare("INSERT INTO urunvaryantlari (UrunId, VaryantAdi, StokAdedi) values (?, ?, ?)");
 							$IkinciVaryantEklemeSorgusu->execute([$SonEklenenUrununIDsi, $GelenVaryantAdi2, $GelenStokAdedi2]);
@@ -242,7 +242,7 @@ if(isset($_SESSION["Yonetici"])){
 							$OnuncuVaryantEklemeSorgusu		=	$VeritabaniBaglantisi->prepare("INSERT INTO urunvaryantlari (UrunId, VaryantAdi, StokAdedi) values (?, ?, ?)");
 							$OnuncuVaryantEklemeSorgusu->execute([$SonEklenenUrununIDsi, $GelenVaryantAdi10, $GelenStokAdedi10]);
 						}
-		
+
 						if(($GelenResim2["name"]!="") and ($GelenResim2["type"]!="") and ($GelenResim2["tmp_name"]!="") and ($GelenResim2["error"]==0) and ($GelenResim2["size"]>0)){
 							$IkinciResimIcinDosyaAdi		=	ResimAdiOlustur();
 							$GelenIkinciResminUzantisi		=	substr($GelenResim2["name"], -4);
@@ -251,7 +251,7 @@ if(isset($_SESSION["Yonetici"])){
 								}
 							$IkinciResimIcinYeniDosyaAdi	=	$IkinciResimIcinDosyaAdi.$GelenIkinciResminUzantisi;
 
-							$IkinciResimYukle	=	new upload($GelenResim2, "tr-TR");
+							$IkinciResimYukle	=	new \Verot\Upload\Upload($GelenResim2, "tr-TR");
 								if($IkinciResimYukle->uploaded){
 								   $IkinciResimYukle->mime_magic_check			=	true;
 								   $IkinciResimYukle->allowed					=	array("image/*");
@@ -266,23 +266,23 @@ if(isset($_SESSION["Yonetici"])){
 								   $IkinciResimYukle->process($VerotIcinKlasorYolu.$ResimKlasoru);
 
 									if($IkinciResimYukle->processed){
-										$IkinciResimGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET UrunResmiIki = ? WHERE id = ? LIMIT 1");
+										$IkinciResimGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET UrunResmiiki = ? WHERE id = ? LIMIT 1");
 										$IkinciResimGuncellemeSorgusu->execute([$IkinciResimIcinYeniDosyaAdi, $SonEklenenUrununIDsi]);
 										$IkinciResimGuncellemeKontrol	=	$IkinciResimGuncellemeSorgusu->rowCount();
-										
+
 										if($IkinciResimGuncellemeKontrol<1){
 											header("Location:index.php?SKD=0&SKI=98");
 											exit();
 										}
-										
+
 										$IkinciResimYukle->clean();
 									}else{
 										header("Location:index.php?SKD=0&SKI=98");
 										exit();
-									} 
-								}									
-						}
-		
+									}
+								}
+						}// resim2- 3 -4  if'nin sonuna else yapmıyoruz  çünki ekleme yapmazsa hata döndürür
+
 						if(($GelenResim3["name"]!="") and ($GelenResim3["type"]!="") and ($GelenResim3["tmp_name"]!="") and ($GelenResim3["error"]==0) and ($GelenResim3["size"]>0)){
 							$UcuncuResimIcinDosyaAdi		=	ResimAdiOlustur();
 							$GelenUcuncuResminUzantisi		=	substr($GelenResim3["name"], -4);
@@ -291,7 +291,7 @@ if(isset($_SESSION["Yonetici"])){
 								}
 							$UcuncuResimIcinYeniDosyaAdi	=	$UcuncuResimIcinDosyaAdi.$GelenUcuncuResminUzantisi;
 
-							$UcuncuResimYukle	=	new upload($GelenResim3, "tr-TR");
+							$UcuncuResimYukle	=	new \Verot\Upload\Upload($GelenResim3, "tr-TR");
 								if($UcuncuResimYukle->uploaded){
 								   $UcuncuResimYukle->mime_magic_check			=	true;
 								   $UcuncuResimYukle->allowed					=	array("image/*");
@@ -309,19 +309,19 @@ if(isset($_SESSION["Yonetici"])){
 										$UcuncuResimGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET UrunResmiUc = ? WHERE id = ? LIMIT 1");
 										$UcuncuResimGuncellemeSorgusu->execute([$UcuncuResimIcinYeniDosyaAdi, $SonEklenenUrununIDsi]);
 										$UcuncuResimGuncellemeKontrol	=	$UcuncuResimGuncellemeSorgusu->rowCount();
-										
+
 										if($UcuncuResimGuncellemeKontrol<1){
 											header("Location:index.php?SKD=0&SKI=98");
 											exit();
 										}
-										
+
 										$UcuncuResimYukle->clean();
 									}else{
 										header("Location:index.php?SKD=0&SKI=98");
 										exit();
-									} 
-								}									
-						}		
+									}
+								}
+						}
 
 						if(($GelenResim4["name"]!="") and ($GelenResim4["type"]!="") and ($GelenResim4["tmp_name"]!="") and ($GelenResim4["error"]==0) and ($GelenResim4["size"]>0)){
 							$DorduncuResimIcinDosyaAdi		=	ResimAdiOlustur();
@@ -331,7 +331,7 @@ if(isset($_SESSION["Yonetici"])){
 								}
 							$DorduncuResimIcinYeniDosyaAdi	=	$DorduncuResimIcinDosyaAdi.$GelenDorduncuResminUzantisi;
 
-							$DorduncuResimYukle	=	new upload($GelenResim4, "tr-TR");
+							$DorduncuResimYukle	=	new \Verot\Upload\Upload($GelenResim4, "tr-TR");
 								if($DorduncuResimYukle->uploaded){
 								   $DorduncuResimYukle->mime_magic_check			=	true;
 								   $DorduncuResimYukle->allowed						=	array("image/*");
@@ -349,43 +349,51 @@ if(isset($_SESSION["Yonetici"])){
 										$DorduncuResimGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET UrunResmiDort = ? WHERE id = ? LIMIT 1");
 										$DorduncuResimGuncellemeSorgusu->execute([$DorduncuResimIcinYeniDosyaAdi, $SonEklenenUrununIDsi]);
 										$DorduncuResimGuncellemeKontrol	=	$DorduncuResimGuncellemeSorgusu->rowCount();
-										
+
 										if($DorduncuResimGuncellemeKontrol<1){
 											header("Location:index.php?SKD=0&SKI=98");
 											exit();
 										}
-										
+
 										$DorduncuResimYukle->clean();
 									}else{
 										header("Location:index.php?SKD=0&SKI=98");
 										exit();
-									} 
-								}									
-						}	
+									}
+								}
+						}
 	
 						header("Location:index.php?SKD=0&SKI=97");
 						exit();
 					}else{
+                        echo "1";
+                        die();
 						header("Location:index.php?SKD=0&SKI=98");
 						exit();
 					}
 				}else{
+                    echo "2";
+                    die();
 					header("Location:index.php?SKD=0&SKI=98");
 					exit();
 				}
 			}else{
+
 				header("Location:index.php?SKD=0&SKI=98");
 				exit();
 			}
 		}else{
+
 			header("Location:index.php?SKD=0&SKI=98");
 			exit();
 		}
 	}else{
+
 		header("Location:index.php?SKD=0&SKI=98");
 		exit();
 	}
 }else{
+
 	header("Location:index.php?SKD=1");
 	exit();
 }

@@ -149,9 +149,10 @@ if(isset($_SESSION["Yonetici"])){
 	$GelenResim2					=	$_FILES["Resim2"];
 	$GelenResim3					=	$_FILES["Resim3"];
 	$GelenResim4					=	$_FILES["Resim4"];
-	
+
 	if(($GelenUrunMenusu!="") and ($GelenUrunAdi!="") and ($GelenUrunFiyati!="") and ($GelenParaBirimi!="") and ($GelenKdvOrani!="") and ($GelenKargoUcreti!="") and ($GelenUrunAciklamasi!="") and ($GelenVaryantBasligi!="") and ($GelenVaryantAdi1!="") and ($GelenStokAdedi1!="")){
-		$UrunSorgusu	=	$VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE id = ? LIMIT 1");
+        //ürün silme için ürün sorgusu çektim
+        $UrunSorgusu	=	$VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE id = ? LIMIT 1");
 		$UrunSorgusu->execute([$GelenID]);
 		$UrunKontrol	=	$UrunSorgusu->rowCount();
 		$UrunBilgisi	=	$UrunSorgusu->fetch(PDO::FETCH_ASSOC);
@@ -166,11 +167,12 @@ if(isset($_SESSION["Yonetici"])){
 				$ResimKlasoru	=	"UrunResimleri/Erkek/";
 			}elseif($MenuTuruKaydi["UrunTuru"] == "Kadın Ayakkabısı"){
 				$ResimKlasoru	=	"UrunResimleri/Kadin/";
-			}elseif($MenuTuruKaydi["UrunTuru"] == "Çocuk Ayakkabısı"){
+			}elseif($MenuTuruKaydi["UrunTuru"] == "Cocuk Ayakkabısı"){
 				$ResimKlasoru	=	"UrunResimleri/Cocuk/";
 			}
 
 			if($MenuTuruKontrol>0){
+
 				$UrunGuncellemeSorgusu		=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET MenuId = ?, UrunAdi = ?, UrunFiyati = ?, ParaBirimi = ?, KdvOrani = ?, UrunAciklamasi = ?, VaryantBasligi = ?, KargoUcreti = ? WHERE id = ? LIMIT 1");
 				$UrunGuncellemeSorgusu->execute([$GelenUrunMenusu, $GelenUrunAdi, $GelenUrunFiyati, $GelenParaBirimi, $GelenKdvOrani, $GelenUrunAciklamasi, $GelenVaryantBasligi, $GelenKargoUcreti, $GelenID]);
 				$UrunGuncellemeKontrol		=	$UrunGuncellemeSorgusu->rowCount();
@@ -183,7 +185,7 @@ if(isset($_SESSION["Yonetici"])){
 						}
 					$BirinciResimIcinYeniDosyaAdi	=	$BirinciResimIcinDosyaAdi.$GelenBirinciResminUzantisi;
 
-					$BirinciResimYukle	=	new upload($GelenResim1, "tr-TR");
+					$BirinciResimYukle	=	new \Verot\Upload\Upload($GelenResim1, "tr-TR");
 						if($BirinciResimYukle->uploaded){
 						   $BirinciResimYukle->mime_magic_check			=	true;
 						   $BirinciResimYukle->allowed					=	array("image/*");
@@ -226,7 +228,7 @@ if(isset($_SESSION["Yonetici"])){
 						}
 					$IkinciResimIcinYeniDosyaAdi	=	$IkinciResimIcinDosyaAdi.$GelenIkinciResminUzantisi;
 
-					$IkinciResimYukle	=	new upload($GelenResim2, "tr-TR");
+					$IkinciResimYukle	=	new \Verot\Upload\Upload($GelenResim2, "tr-TR");
 						if($IkinciResimYukle->uploaded){
 						   $IkinciResimYukle->mime_magic_check			=	true;
 						   $IkinciResimYukle->allowed					=	array("image/*");
@@ -241,10 +243,10 @@ if(isset($_SESSION["Yonetici"])){
 						   $IkinciResimYukle->process($VerotIcinKlasorYolu.$ResimKlasoru);
 
 							if($IkinciResimYukle->processed){
-								$SilinecekIkinciResimYolu		=	"../Resimler/".$ResimKlasoru.$UrunBilgisi["UrunResmiIki"];
+								$SilinecekIkinciResimYolu		=	"../Resimler/".$ResimKlasoru.$UrunBilgisi["UrunResmiiki"];
 								unlink($SilinecekIkinciResimYolu);
 
-								$IkinciResimGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET UrunResmiIki = ? WHERE id = ? LIMIT 1");
+								$IkinciResimGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET UrunResmiiki = ? WHERE id = ? LIMIT 1");
 								$IkinciResimGuncellemeSorgusu->execute([$IkinciResimIcinYeniDosyaAdi, $GelenID]);
 								$IkinciResimGuncellemeKontrol	=	$IkinciResimGuncellemeSorgusu->rowCount();
 
@@ -269,7 +271,7 @@ if(isset($_SESSION["Yonetici"])){
 						}
 					$UcuncuResimIcinYeniDosyaAdi	=	$UcuncuResimIcinDosyaAdi.$GelenUcuncuResminUzantisi;
 
-					$UcuncuResimYukle	=	new upload($GelenResim3, "tr-TR");
+					$UcuncuResimYukle	=	new \Verot\Upload\Upload($GelenResim3, "tr-TR");
 						if($UcuncuResimYukle->uploaded){
 						   $UcuncuResimYukle->mime_magic_check			=	true;
 						   $UcuncuResimYukle->allowed					=	array("image/*");
@@ -312,7 +314,7 @@ if(isset($_SESSION["Yonetici"])){
 						}
 					$DorduncuResimIcinYeniDosyaAdi	=	$DorduncuResimIcinDosyaAdi.$GelenDorduncuResminUzantisi;
 
-					$DorduncuResimYukle	=	new upload($GelenResim4, "tr-TR");
+					$DorduncuResimYukle	=	new \Verot\Upload\Upload($GelenResim4, "tr-TR");
 						if($DorduncuResimYukle->uploaded){
 						   $DorduncuResimYukle->mime_magic_check			=	true;
 						   $DorduncuResimYukle->allowed					=	array("image/*");
@@ -360,11 +362,14 @@ if(isset($_SESSION["Yonetici"])){
 				
 				if(array_key_exists(0, $VaryantIsimDizisi)){
 					if(($GelenVaryantAdi1!="") and ($GelenStokAdedi1!="")){
+                        //sadece urunid ile değil varayntadi ilede yakalamamız gerek  lastinsertid yaptığımız için  urun idler son id le aynı olduğundan dolayı  varyant adinlada arama yapıyoyoruz
 						$BirinciVaryantGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunvaryantlari SET VaryantAdi = ?, StokAdedi = ? WHERE UrunId = ? AND VaryantAdi = ? LIMIT 1");
 						$BirinciVaryantGuncellemeSorgusu->execute([$GelenVaryantAdi1, $GelenStokAdedi1, $GelenID, $VaryantIsimDizisi[0]]);
 						$BirinciVaryantGuncellemeKontrol	=	$BirinciVaryantGuncellemeSorgusu->rowCount();
 					}
 				}
+
+                // ilk varyant zorunlu  olarak yaptığımız  için onu else ile delete yaptırmamıza gerek yok, varyant adi2  satırı boş bırakarak kaydettiğimizde zorunlu olmadığı için delete yaptıroyruz ki değerleri boş atması için
 
 				if(array_key_exists(1, $VaryantIsimDizisi)){
 					if(($GelenVaryantAdi2!="") and ($GelenStokAdedi2!="")){

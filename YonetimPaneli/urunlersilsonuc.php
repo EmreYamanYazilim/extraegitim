@@ -5,12 +5,16 @@ if(isset($_SESSION["Yonetici"])){
 	}else{
 		$GelenID	=	"";
 	}
-	
+	// silinecek olanlar ->  favoriler,sepetteki kayıtlar
+
+
 	if($GelenID!=""){
+        //menuid bulabilmek için ve ürün sayısını güncelleyebilmek için sorguyu yaptım menuid değişkene verdim
 		$UrunlerSorgusu			=	$VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE id = ?");
 		$UrunlerSorgusu->execute([$GelenID]);
 		$UrunlerSorgusuKontrol	=	$UrunlerSorgusu->rowCount();
 		$UrunlerSorgusuKaydi	=	$UrunlerSorgusu->fetch(PDO::FETCH_ASSOC);
+
 
 		if($UrunlerSorgusuKontrol>0){
 			$SilinecekUrununMenuIDsi	=	$UrunlerSorgusuKaydi["MenuId"];

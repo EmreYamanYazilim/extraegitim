@@ -56,7 +56,7 @@ if(isset($_SESSION["Yonetici"])){
 					<td width="230">Para Birimi</td>
 					<td width="20">:</td>
 					<td width="500"><select name="ParaBirimi" class="SelectAlanlari">
-						<option value="TRY" <?php if(DonusumleriGeriDondur($UrunBilgisi["ParaBirimi"]) == "TRY"){ ?>selected="selected"<?php } ?>>Türk Lirası</option>
+						<option value="TRY" <?php if(DonusumleriGeriDondur($UrunBilgisi["ParaBirimi"]) == "TRY"){ ?>selected="selected"<?php } ?>>Türk Lirası</option>  <!-- seçili gelmesi için if içine selected yaptık -->
 						<option value="USD" <?php if(DonusumleriGeriDondur($UrunBilgisi["ParaBirimi"]) == "USD"){ ?>selected="selected"<?php } ?>>Amerikan Doları</option>
 						<option value="EUR" <?php if(DonusumleriGeriDondur($UrunBilgisi["ParaBirimi"]) == "EUR"){ ?>selected="selected"<?php } ?>>Euro</option>
 					</select></td>
@@ -104,11 +104,12 @@ if(isset($_SESSION["Yonetici"])){
 				
 				
 				<?php
+
 				$VaryantlarSorgusu	=	$VeritabaniBaglantisi->prepare("SELECT * FROM urunvaryantlari WHERE UrunId = ?");
 				$VaryantlarSorgusu->execute([$GelenID]);
 				$VaryantSayisi		=	$VaryantlarSorgusu->rowCount();
 				$VaryantBilgisi		=	$VaryantlarSorgusu->fetchAll(PDO::FETCH_ASSOC);
-				
+                // diziye atayarak varyatnları çektim array_search  ile valueleri  alırız  ve array_key_exists ile keyleri yakalarız
 				$VaryantIsimDizisi	=	array();
 				$VaryantStokDizisi	=	array();
 				
@@ -116,7 +117,8 @@ if(isset($_SESSION["Yonetici"])){
 					$VaryantIsimDizisi[]	=	$Varyant["VaryantAdi"];
 					$VaryantStokDizisi[]	=	$Varyant["StokAdedi"];
 				}
-					  
+
+
 				if(array_key_exists(1, $VaryantIsimDizisi)){
 					$IkinciVaryantAdi		=	DonusumleriGeriDondur($VaryantIsimDizisi[1]);
 					$IkinciVaryantStok		=	DonusumleriGeriDondur($VaryantStokDizisi[1]);
@@ -193,6 +195,7 @@ if(isset($_SESSION["Yonetici"])){
 							<td width="178">1. Varyant Stok Adedi</td>
 							<td width="20">:</td>
 							<td width="60"><input type="text" name="StokAdedi1" class="InputAlanlari" value="<?php echo DonusumleriGeriDondur($VaryantStokDizisi[0]); ?>"></td>
+<!--                            0 dizi yani birinci varyantı direk yazdım 2. ve diğer varyantları dğeişkenle boş gelebilir tazında değişkene atayarak yazdım-->
 						</tr>
 					</table></td>
 				</tr>

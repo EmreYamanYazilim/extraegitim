@@ -14,7 +14,7 @@ if(isset($_SESSION["Yonetici"])){
 	$ToplamKayitSayisiSorgusu				=	$VeritabaniBaglantisi->prepare("SELECT * FROM urunler WHERE Durumu = ? $AramaKosulu ORDER BY id DESC");
 	$ToplamKayitSayisiSorgusu->execute([1]);
 	$ToplamKayitSayisiSorgusu				=	$ToplamKayitSayisiSorgusu->rowCount();
-	$SayfalamayaBaslanacakKayitSayisi		=	($Sayfalama*$SayfaBasinaGosterilecekKayitSayisi)-$SayfaBasinaGosterilecekKayitSayisi;
+	$SayfalamayaBaslanacakKayitSayisi		=	($Sayfalama*$SayfaBasinaGosterilecekKayitSayisi)-$SayfaBasinaGosterilecekKayitSayisi;  //sayfalama değişkeni indexten bağlanıyor
 	$BulunanSayfaSayisi						=	ceil($ToplamKayitSayisiSorgusu/$SayfaBasinaGosterilecekKayitSayisi);
 ?>
 <table width="760" align="center" border="0" cellpadding="0" cellspacing="0">
@@ -34,6 +34,7 @@ if(isset($_SESSION["Yonetici"])){
 					</div>
 					<div class="AramaAlaniInputKapsamaAlani">
 						<input type="text" name="AramaIcerigi" class="AramaAlaniInputu">
+<!--                        yukarıda AramaIcerigi'ni request yapıyorum-->
 					</div>
 				</form></div></td>
 			</tr>
@@ -50,6 +51,7 @@ if(isset($_SESSION["Yonetici"])){
 	
 	if($UrunlerSayisi>0){
 		foreach($UrunlerKayitlari as $Urunler){
+            //urunler tablosunda MenuId den menunlerde urun  nerde onu buluıyorum
 			$UrununMenuSorgusu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM menuler WHERE id = ? LIMIT 1");
 			$UrununMenuSorgusu->execute([DonusumleriGeriDondur($Urunler["MenuId"])]);
 			$UrunMenuKaydi			=	$UrununMenuSorgusu->fetch(PDO::FETCH_ASSOC);
@@ -58,7 +60,7 @@ if(isset($_SESSION["Yonetici"])){
 				$ResimKlasoru	=	"Erkek";
 			}elseif($Urunler["UrunTuru"] == "Kadın Ayakkabısı"){
 				$ResimKlasoru	=	"Kadin";
-			}elseif($Urunler["UrunTuru"] == "Çocuk Ayakkabısı"){
+			}elseif($Urunler["UrunTuru"] == "Cocuk Ayakkabısı"){
 				$ResimKlasoru	=	"Cocuk";
 			}
 	?>	

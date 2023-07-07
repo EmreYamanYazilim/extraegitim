@@ -1,5 +1,6 @@
 <?php
 if(isset($_SESSION["Yonetici"])){
+    // sayfalama alanı
 $SayfalamaIcinSolVeSagButonSayisi		=	2;
 $SayfaBasinaGosterilecekKayitSayisi		=	10;
 $ToplamKayitSayisiSorgusu				=	$VeritabaniBaglantisi->prepare("SELECT DISTINCT SiparisNumarasi FROM siparisler WHERE OnayDurumu = ? AND KargoDurumu = ? ORDER BY id DESC");
@@ -7,6 +8,7 @@ $ToplamKayitSayisiSorgusu->execute([1, 1]);
 $ToplamKayitSayisiSorgusu				=	$ToplamKayitSayisiSorgusu->rowCount();
 $SayfalamayaBaslanacakKayitSayisi		=	($Sayfalama*$SayfaBasinaGosterilecekKayitSayisi)-$SayfaBasinaGosterilecekKayitSayisi;
 $BulunanSayfaSayisi						=	ceil($ToplamKayitSayisiSorgusu/$SayfaBasinaGosterilecekKayitSayisi);
+
 ?>
 <table width="760" align="center" border="0" cellpadding="0" cellspacing="0">
 	<tr height="70">
@@ -63,6 +65,7 @@ $BulunanSayfaSayisi						=	ceil($ToplamKayitSayisiSorgusu/$SayfaBasinaGosterilec
 				exit();
 			}
 		}
+        // freach döngü sonrasına  sayfalama alanı geldi
 
 		if($BulunanSayfaSayisi>1){
 		?>
@@ -95,6 +98,7 @@ $BulunanSayfaSayisi						=	ceil($ToplamKayitSayisiSorgusu/$SayfaBasinaGosterilec
 						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=108&SYF=" . $SayfalamaIcinSayfaDegeriniBirIleriAl . "'>></a></span>";
 						echo "<span class='SayfalamaPasif'><a href='index.php?SKD=0&SKI=108&SYF=" . $BulunanSayfaSayisi . "'>>></a></span>";
 					}
+                    // sayfalama alanı bitiş
 					?>
 				</div>
 			</div></td>

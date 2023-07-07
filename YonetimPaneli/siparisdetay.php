@@ -21,21 +21,21 @@ if(isset($_SESSION["Yonetici"])){
 	$SiparislerKayitlari	=	$SiparislerSorgusu->fetchAll(PDO::FETCH_ASSOC);
 	
 	if($SiparislerSayisi>0){
-		$DonguSayisi	=	0;
+		$DonguSayisi	=	0;  // adres alanını bir kere yazdırmak için
 		
 		foreach($SiparislerKayitlari as $SiparisBilgileri){
 			if($SiparisBilgileri["UrunTuru"] == "Erkek Ayakkabısı"){
 				$ResimKlasoru	=	"Erkek";
 			}elseif($SiparisBilgileri["UrunTuru"] == "Kadın Ayakkabısı"){
 				$ResimKlasoru	=	"Kadin";
-			}elseif($SiparisBilgileri["UrunTuru"] == "Çocuk Ayakkabısı"){
+			}elseif($SiparisBilgileri["UrunTuru"] == "Cocuk Ayakkabısı"){
 				$ResimKlasoru	=	"Cocuk";
 			}
 			?>	
 			<tr>
 				<td colspan="2" style="border-bottom: 1px dashed #CCCCCC;" valign="top"><table width="750" align="right" border="0" cellpadding="0" cellspacing="0">
 					<?php
-					if($DonguSayisi==0){
+					if($DonguSayisi==0){ // adres alanını bir kere yazdırmak için
 					?>
 					<tr>
 						<td colspan="3"><table width="750" align="right" border="0" cellpadding="0" cellspacing="0">
@@ -68,7 +68,7 @@ if(isset($_SESSION["Yonetici"])){
 						<td colspan="3">&nbsp;</td>
 					</tr>
 					<?php
-					}
+					} // adres alanını bir kere yazdırmak için if kapaması
 					?>
 					<tr>
 						<td width="60" valign="top"><img src="../Resimler/UrunResimleri/<?php echo $ResimKlasoru; ?>/<?php echo DonusumleriGeriDondur($SiparisBilgileri["UrunResmiBir"]); ?>" border="0" width="60" height="80"></td>
@@ -132,7 +132,7 @@ if(isset($_SESSION["Yonetici"])){
 	</tr>
 		
 	<tr>
-		<td colspan="2"><form action="index.php?SKD=0&SKI=110&SiparisNo=<?php echo DonusumleriGeriDondur($GelenSiparisNo); ?>" method="post">
+		<td colspan="2"><form action="index.php?SKD=0&SKI=110&SiparisNo=<?php echo DonusumleriGeriDondur($GelenSiparisNo); ?>" method="POST">
 			<table width="750" align="right" border="0" cellpadding="0" cellspacing="0">
 				<tr height="40">
 					<td colspan="3"><table width="750" align="right" border="0" cellpadding="0" cellspacing="0">

@@ -28,7 +28,7 @@ if(isset($_SESSION["Yonetici"])){
 				$ResimKlasoru	=	"Erkek";
 			}elseif($SiparisBilgileri["UrunTuru"] == "Kadın Ayakkabısı"){
 				$ResimKlasoru	=	"Kadin";
-			}elseif($SiparisBilgileri["UrunTuru"] == "Çocuk Ayakkabısı"){
+			}elseif($SiparisBilgileri["UrunTuru"] == "Cocuk Ayakkabısı"){
 				$ResimKlasoru	=	"Cocuk";
 			}
 			?>	

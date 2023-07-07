@@ -13,6 +13,7 @@ if(isset($_SESSION["Yonetici"])){
 		$SiparisKontrol			=	$SiparislerSorgusu->rowCount();
 		
 		if($SiparisKontrol>0){
+//            siparis sileme bölümü göngüsü
 			foreach($SiparisKayitlari as $Satirlar){
 				$SiparistekiId				=	$Satirlar["id"];
 				$SiparistekiUrununIDsi		=	$Satirlar["UrunId"];
@@ -23,11 +24,12 @@ if(isset($_SESSION["Yonetici"])){
 				$SiparisSilmeSorgusu->execute([$SiparistekiId]);
 				$SilmeKontrol			=	$SiparisSilmeSorgusu->rowCount();
 
+                // siparisler silindikten sonra  toplam satış sayısı azalmasını düzeltmek için tolam satis sayisini arttırma
 				if($SilmeKontrol>0){
 					$UrunGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunler SET ToplamSatisSayisi=ToplamSatisSayisi+? WHERE id = ? LIMIT 1");
 					$UrunGuncellemeSorgusu->execute([$SiparistekiUrununAdedi, $SiparistekiUrununIDsi]);
 					$UrunGuncellemeKontrol	=	$UrunGuncellemeSorgusu->rowCount();
-
+                    // siparisler silindikten sonra  toplam satış sayısı azalmasını düzeltmek için stok adedini arttırma
 					if($UrunGuncellemeKontrol>0){
 						$VaryantGuncellemeSorgusu	=	$VeritabaniBaglantisi->prepare("UPDATE urunvaryantlari SET StokAdedi=StokAdedi+? WHERE VaryantAdi = ? AND UrunId = ? LIMIT 1");
 						$VaryantGuncellemeSorgusu->execute([$SiparistekiUrununAdedi, DonusumleriGeriDondur($SiparistekiUrununVaryanti), $SiparistekiUrununIDsi]);

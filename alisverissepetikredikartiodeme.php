@@ -116,6 +116,8 @@ if(isset($_SESSION["Kullanici"])){
                                             </tr>
                                             <tr height="40">
                                                 <td>Son Kullanma Tarihi</td>
+
+                                                <!-- tarihler değiştirilecek -->
                                                 <td width="100"><select name="Ecom_Payment_Card_ExpDate_Month" class="SelectAlanlari">
                                                         <option value=""></option>
                                                         <option value="01">01</option>

@@ -88,8 +88,8 @@ if (isset($_SESSION["Kullanici"])) {
                     $UrununToplamKargoFiyati = ($UrunKargoUcreti * $SepettekiUrunAdedi);
 
 
-                    $SiparisEkle = $VeritabaniBaglantisi->prepare("INSERT INTO siparisler (UyeId, SiparisNumarasi, UrunId, UrunTuru, UrunAdi, UrunFiyati, KdvOrani ,UrunAdedi, ToplamUrunFiyati, KargoFirmasiSecimi, KargoUcreti, UrunResmiBir, VaryantBasligi, VaryantSecimi, AdresAdiSoyadi, AdresDetay, AdresTelefon, OdemeSecimi, TaksitSecimi, SiparisTarihi, SiparisIpAdresi, KargoDurumu) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $SiparisEkle->execute([$SepettekiUyeId, $SepetSepetNumarasi, $SepettekiUrunId, $UrunTuru, $UrunAdi, $UrunFiyatiHesapla, $UrunKdvOrani, $SepettekiUrunAdedi, $UrnunToplamFiyati, $KargonunAdi, $UrununToplamKargoFiyati, $UrunResmiBir, $VaryantBasligi, $VaryantAdi, $AdresAdSoyad, $AdresToparla, $AdresTelefonNumarasi, $GelenOdemeTuruSecimi, 0, $ZamanDamgasi, $IPAdresi, 0]);
+                    $SiparisEkle = $VeritabaniBaglantisi->prepare("INSERT INTO siparisler (UyeId, SiparisNumarasi, UrunId, UrunTuru, UrunAdi, UrunFiyati, KdvOrani ,UrunAdedi, ToplamUrunFiyati, KargoFirmasiSecimi, KargoUcreti, UrunResmiBir, VaryantBasligi, VaryantSecimi, AdresAdiSoyadi, AdresDetay, AdresTelefon, OdemeSecimi, TaksitSecimi, SiparisTarihi, SiparisIpAdresi, KargoDurumu,OnayDurumu) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $SiparisEkle->execute([$SepettekiUyeId, $SepetSepetNumarasi, $SepettekiUrunId, $UrunTuru, $UrunAdi, $UrunFiyatiHesapla, $UrunKdvOrani, $SepettekiUrunAdedi, $UrnunToplamFiyati, $KargonunAdi, $UrununToplamKargoFiyati, $UrunResmiBir, $VaryantBasligi, $VaryantAdi, $AdresAdSoyad, $AdresToparla, $AdresTelefonNumarasi, $GelenOdemeTuruSecimi, 0, $ZamanDamgasi, $IPAdresi, 0,0]);
                     $EklemeKontrol = $SiparisEkle->rowCount();
 
 

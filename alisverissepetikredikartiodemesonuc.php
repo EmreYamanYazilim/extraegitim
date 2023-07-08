@@ -201,8 +201,8 @@ if($mdStatus =="1" || $mdStatus == "2" || $mdStatus == "3" || $mdStatus == "4"){
                 $UrununToplamKargoFiyati = ($UrunKargoUcreti * $SepettekiUrunAdedi);
 
 
-                $SiparisEkle = $VeritabaniBaglantisi->prepare("INSERT INTO siparisler (UyeId, SiparisNumarasi, UrunId, UrunTuru, UrunAdi, UrunFiyati, KdvOrani ,UrunAdedi, ToplamUrunFiyati, KargoFirmasiSecimi, KargoUcreti, UrunResmiBir, VaryantBasligi, VaryantSecimi, AdresAdiSoyadi, AdresDetay, AdresTelefon, OdemeSecimi, TaksitSecimi, SiparisTarihi, SiparisIpAdresi, KargoDurumu) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $SiparisEkle->execute([$SepettekiUyeId, $SepetSepetNumarasi, $SepettekiUrunId, $UrunTuru, $UrunAdi, $UrunFiyatiHesapla, $UrunKdvOrani, $SepettekiUrunAdedi, $UrnunToplamFiyati, $KargonunAdi, $UrununToplamKargoFiyati, $UrunResmiBir, $VaryantBasligi, $VaryantAdi, $AdresAdSoyad, $AdresToparla, $AdresTelefonNumarasi, 'Kredi Kartı', $TaksitSayisi, $ZamanDamgasi, $IPAdresi, 0]);
+                $SiparisEkle = $VeritabaniBaglantisi->prepare("INSERT INTO siparisler (UyeId, SiparisNumarasi, UrunId, UrunTuru, UrunAdi, UrunFiyati, KdvOrani ,UrunAdedi, ToplamUrunFiyati, KargoFirmasiSecimi, KargoUcreti, UrunResmiBir, VaryantBasligi, VaryantSecimi, AdresAdiSoyadi, AdresDetay, AdresTelefon, OdemeSecimi, TaksitSecimi, SiparisTarihi, SiparisIpAdresi, KargoDurumu,OnayDurumu) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $SiparisEkle->execute([$SepettekiUyeId, $SepetSepetNumarasi, $SepettekiUrunId, $UrunTuru, $UrunAdi, $UrunFiyatiHesapla, $UrunKdvOrani, $SepettekiUrunAdedi, $UrnunToplamFiyati, $KargonunAdi, $UrununToplamKargoFiyati, $UrunResmiBir, $VaryantBasligi, $VaryantAdi, $AdresAdSoyad, $AdresToparla, $AdresTelefonNumarasi, 'Kredi Kartı', $TaksitSayisi, $ZamanDamgasi, $IPAdresi, 0, 0]);
                 $EklemeKontrol = $SiparisEkle->rowCount();
 
 

@@ -9,7 +9,7 @@ if(isset($_SESSION["Yonetici"])){
 		<td style="font-size: 10px;">&nbsp;</td>
 	</tr>
 	<?php
-	$BildirimSorgusu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM havalebildirimleri ORDER BY IslemTarihi ASC");
+	$BildirimSorgusu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM havalebildirimleri ORDER BY İslemTarihi ASC");
 	$BildirimSorgusu->execute();
 	$BildirimSayisi		=	$BildirimSorgusu->rowCount();
 	$BildirimKayitlari	=	$BildirimSorgusu->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +24,7 @@ if(isset($_SESSION["Yonetici"])){
 		<td style="border-bottom: 1px dashed #CCCCCC;" valign="top"><table width="750" align="right" border="0" cellpadding="0" cellspacing="0">
 			<tr height="30">
 				<td colspan="2" align="left" width="400"><b><?php echo DonusumleriGeriDondur($Bildirimler["AdiSoyadi"]); ?></b></td>
-				<td align="right" width="350"><?php echo TarihBul($Bildirimler["IslemTarihi"]); ?></td>
+				<td align="right" width="350"><?php echo TarihBul($Bildirimler["İslemTarihi"]); ?></td>
 			</tr>
 			<tr>
 				<td align="left" width="200">Banka : <?php echo DonusumleriGeriDondur($BankaKayitlari["BankaAdi"]); ?></td>

@@ -10,6 +10,7 @@ $SiteKokDizini      =   $_SERVER["DOCUMENT_ROOT"];
 $ResimKlasoruYolu   =   '/extraegitim/Resimler/';//kendi localhostza göre veya internet üzerindeki alanıza göre değiştircez
 $VerotIcinKlasorYolu =   $SiteKokDizini.$ResimKlasoruYolu;
 
+
 function TarihBul($Deger){
     $Cevir =    date("d.m.Y H:i:s", $Deger);
     $Sonuc = $Cevir;
@@ -38,6 +39,7 @@ function TumBosluklariSil($Deger){
     return $Sonuc;
 
 }
+
 
 function DonusumleriGeriDondur($Deger){
     $GeriDondur     =   htmlspecialchars_decode($Deger, ENT_QUOTES);

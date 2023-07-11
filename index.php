@@ -12,7 +12,7 @@ if(isset($_REQUEST["SK"])){
     $SayfaKoduDegeri    =   0;
 }
 
-if (isset($_REQUEST["SYF"])){
+if (isset($_REQUEST["SYF"])){  // sayfa içinde sayfalamma oluşturmak için  kullanıyoruz
     $Sayfalama = SayiliIcerikleriFilitrele($_REQUEST["SYF"]);
 }else{
     $Sayfalama = 1;
@@ -39,6 +39,7 @@ if (isset($_REQUEST["SYF"])){
     <script type="text/javascript" src="Frameworks/JQery/jquery-3.3.1.min.js" language="JavaScript"></script>
     <link type="text/css" rel="stylesheet" href="Ayarlar/stil.css">
     <script type="text/javascript" src="Ayarlar/fonksiyonlar.js"></script>
+
     
 
 </head>
@@ -152,82 +153,82 @@ if (isset($_REQUEST["SYF"])){
                             </tr>
 
                             <tr height="30">
-                                <td><a href="index.php?SK=1"><b>Hakkımızda</b></a></td>
+                                <td class="AltMenusu" ><a href="index.php?SK=1"><b>Hakkımızda</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
                                 <?php
                                 if (isset($_SESSION["Kullanici"])){ ?>
 
-                                    <td><a href="index.php?SK=49"><b>Çıkış Yap</b></a></td>
+                                    <td class="AltMenusu" ><a href="index.php?SK=49"><b>Çıkış Yap</b></a></td>
                                     <td><a href="xxxxx"><b>&nbsp;</b></a></td>
 
                                 <?php  }else{  ?>
 
 
-                                    <td><a href="index.php?SK=31"><b>Giriş Yap</b></a></td>
+                                    <td class="AltMenusu"><a href="index.php?SK=31"><b>Giriş Yap</b></a></td>
                                     <td><a href="xxxxx"><b>&nbsp;</b></a></td>
 
                                 <?php } ?>
 
 
-                                <td><a href="index.php?SK=2"><b>Üyelik sözleşmesi</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=2"><b>Üyelik sözleşmesi</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkFacebook); ?>" target="_blank"><img src="Resimler/Facebook16x16.png" alt="">Facebook</a></td>
+                                <td class="AltMenusu"><a href="<?php echo DonusumleriGeriDondur($SosyalLinkFacebook); ?>" target="_blank"><img src="Resimler/Facebook16x16.png" alt="">Facebook</a></td>
                             </tr>
                             <tr height="30">
-                                <td><a href="index.php?SK=8"><b>Banka Hesaplarımız</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=8"><b>Banka Hesaplarımız</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
 
                                 <?php  if (isset($_SESSION["Kullanici"])){ ?>
 
 
 
-                                    <td><a href="index.php?SK=50"><b>Hesabım</b></a></td>
+                                    <td class="AltMenusu"><a href="index.php?SK=50"><b>Hesabım</b></a></td>
                                     <td><a href="index.php?SK=50"><b>&nbsp;</b></a></td>
                                 <?php }else{ ?>
 
-                                    <td><a href="index.php?SK=49"><b>Çıkış Yap</b></a></td>
+                                    <td class="AltMenusu"><a href="index.php?SK=49"><b>Çıkış Yap</b></a></td>
                                     <td><a href="index.php?SK=49"><b>&nbsp;</b></a></td>
 
                                 <?php } ?>
 
-                                <td><a href="index.php?SK=3"><b>Kullanım Koşulları</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=3"><b>Kullanım Koşulları</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkTwitter); ?>" target="_blank"><img src="Resimler/Twitter16x16.png" alt="">Twitter</a></td>
+                                <td class="AltMenusu"><a href="<?php echo DonusumleriGeriDondur($SosyalLinkTwitter); ?>" target="_blank"><img src="Resimler/Twitter16x16.png" alt="">Twitter</a></td>
                             </tr>
                             <tr height="30">
-                                <td><a href="index.php?SK=9"><b>Havale Bildirim</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=9"><b>Havale Bildirim</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="index.php?SK=21"><b>Sık Sorulan Sorular</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=21"><b>Sık Sorulan Sorular</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="index.php?SK=4"><b>Gizlilik sözleşmesi</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=4"><b>Gizlilik sözleşmesi</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkLinkedin); ?>" target="_blank"><img src="Resimler/LinkedIn16x16.png" alt="">Linked</a></td>
+                                <td class="AltMenusu"><a href="<?php echo DonusumleriGeriDondur($SosyalLinkLinkedin); ?>" target="_blank"><img src="Resimler/LinkedIn16x16.png" alt="">Linked</a></td>
                             </tr>
                             <tr height="30">
-                                <td><a href="index.php?SK=14"><b>Kargom Nerede ?</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=14"><b>Kargom Nerede ?</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
                                 <td><a href="xxxxx"><b></b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="index.php?SK=5"><b>Mesafeli Sözleşmeler</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=5"><b>Mesafeli Sözleşmeler</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkYoutube); ?>" target="_blank"><img src="Resimler/YouTube16x16.png" alt="">youtube</a></td>
+                                <td class="AltMenusu"><a href="<?php echo DonusumleriGeriDondur($SosyalLinkYoutube); ?>" target="_blank"><img src="Resimler/YouTube16x16.png" alt="">youtube</a></td>
                             </tr height="30">
-                            <td><a href="index.php?SK=16"><b>İletişim</b></a></td>
+                            <td class="AltMenusu"><a href="index.php?SK=16"><b>İletişim</b></a></td>
                             <td><a href="xxxxx"><b>&nbsp;</b></a></td>
                             <td><a href="xxxxx"><b></b></a></td>
                             <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                            <td><a href="index.php?SK=6"><b>Teslimat</b></a></td>
+                            <td class="AltMenusu"><a href="index.php?SK=6"><b>Teslimat</b></a></td>
                             <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                            <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkInstegram);  ?>" target="_blank"><img src="Resimler/Instagram16x16.png" alt="">instagram</a></td>
+                            <td class="AltMenusu"><a href="<?php echo DonusumleriGeriDondur($SosyalLinkInstegram);  ?>" target="_blank"><img src="Resimler/Instagram16x16.png" alt="">instagram</a></td>
                             </tr>
                             <tr>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
                                 <td><a href="xxxxx"><b></b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="index.php?SK=7"><b>İptal İade Değişim</b></a></td>
+                                <td class="AltMenusu"><a href="index.php?SK=7"><b>İptal İade Değişim</b></a></td>
                                 <td><a href="xxxxx"><b>&nbsp;</b></a></td>
-                                <td><a href="<?php echo DonusumleriGeriDondur($SosyalLinkPinterest); ?>" target="_blank"><img src="Resimler/Pinterest16x16.png" alt="">pinterest</a></td>
+                                <td class="AltMenusu"><a href="<?php echo DonusumleriGeriDondur($SosyalLinkPinterest); ?>" target="_blank"><img src="Resimler/Pinterest16x16.png" alt="">pinterest</a></td>
                             </tr>
 
 

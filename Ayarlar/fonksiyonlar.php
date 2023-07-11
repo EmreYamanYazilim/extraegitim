@@ -6,6 +6,7 @@
 $IPAdresi			=	$_SERVER['REMOTE_ADDR'];
 $ZamanDamgasi		=	time();
 $TarihSaat			=	date("d.m.Y H:i:s", $ZamanDamgasi);
+
 $SiteKokDizini      =   $_SERVER["DOCUMENT_ROOT"];
 $ResimKlasoruYolu   =   '/extraegitim/Resimler/';//kendi localhostza göre veya internet üzerindeki alanıza göre değiştircez
 $VerotIcinKlasorYolu =   $SiteKokDizini.$ResimKlasoruYolu;
@@ -28,13 +29,13 @@ function UcGunIleriTarihi(){
 
 
 function RakamlarHariciTumKArakterleriSil($Deger){
-    $Islem  =   preg_replace("/[^0-9]/","",$Deger);
+    $Islem  =   preg_replace("/[^0-9]/","",$Deger);  // şapka işareti onların yanındakiler dışındakilerin  manasına gelir o yüzden rakkamlar dışındakileri preg_replace siler
     $Sonuc  =   $Islem;
     return $Sonuc;
 }
 
 function TumBosluklariSil($Deger){
-    $Islem      =   preg_replace("/\s|&nbsp;/","", $Deger);
+    $Islem      =   preg_replace("/\s|&nbsp;/","", $Deger); //  \s boşluk demektir | veya anlamı katar &nbsp; de boşluk demktir
     $Sonuc      =   $Islem;
     return $Sonuc;
 
@@ -42,7 +43,7 @@ function TumBosluklariSil($Deger){
 
 
 function DonusumleriGeriDondur($Deger){
-    $GeriDondur     =   htmlspecialchars_decode($Deger, ENT_QUOTES);
+    $GeriDondur     =   htmlspecialchars_decode($Deger, ENT_QUOTES);  // htmlspacialchars ile etkisiz yaptıklarımızı decode ekleyerek  tekrardan ekletiyoruz
     $Sonuc          =   $GeriDondur;
     return $Sonuc;
 }
@@ -68,7 +69,7 @@ function SayiliIcerikleriFilitrele($Deger){
 
 function IbanBicimlendir($Deger){
     $BoslukSil          =    trim($Deger);
-    $TumbosluklariSil   =   TumBosluklariSil($BoslukSil);
+    $TumbosluklariSil   =   TumBosluklariSil($BoslukSil);// trim gibi boşlukları silidirdik garanti olsun diye yazdık
     $BirinciBlok        =   substr($TumbosluklariSil, 0,4);
     $IkinciBlok         =   substr($TumbosluklariSil,4,4);
     $UcuncuBlok         =   substr($TumbosluklariSil,8,4);

@@ -7,7 +7,7 @@
                         <td style="color:#FF9900"><h3>İletişim</h3></td>
                     </tr>
                     <tr height="30">
-                        <td valign="top" style="border-bottom: 1px dashed #CCCCCC;">Bir sorunuz mu  var ? bize her sorununuzu yazabilrisiniz</td>
+                        <td valign="top"  style="border-bottom: 1px dashed #CCCCCC;">Bir sorunuz mu  var ? bize her sorununuzu yazabilrisiniz</td>
                     </tr>
                     <tr height="30">
                         <td valign="bottom" align="left">İsim Soyisim (*)</td>

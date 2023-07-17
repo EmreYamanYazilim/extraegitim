@@ -70,8 +70,10 @@ if (($GelenIsimSoyisim != "") and ($GelenEmailAdresi != "") and ($GelenSifre != 
         } else {
 
             $UyeEklemeSorgusu = $VeritabaniBaglantisi->prepare("INSERT INTO uyeler (IsimSoyisim, EmailAdresi, Sifre, TelefonNumarasi, Cinsiyet, Durumu, KayitTarihi, KayitIpAdresi) values(?, ?, ?, ?, ?, ?, ?, ?)");
-            $UyeEklemeSorgusu->execute([$GelenIsimSoyisim, $GelenEmailAdresi, $MD5liSifre, $GelenTelefonNumarasi, $GelenCinsiyet, 0, $ZamanDamgasi, $IPAdresi]);
+            $UyeEklemeSorgusu->execute([$GelenIsimSoyisim, $GelenEmailAdresi, $MD5liSifre, $GelenTelefonNumarasi, $GelenCinsiyet, 0, $ZamanDamgasi, $IPAdresi]); 
+            //durumu 0 yaptım  email ile  aktifleştirme hatalı düzeltilmesi gerek o yüzden şimdilik durum 0 olarak devam edicek 
             $KayitKontrol = $UyeEklemeSorgusu->rowCount();
+
 
             if ($KayitKontrol > 0) {
                 header("Location:index.php?SK=24");
